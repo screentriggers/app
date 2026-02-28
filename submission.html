@@ -1,159 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Submit Trigger</title>
-
+<title>Submission Form - Screen Triggers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-
-body{
-font-family:Arial;
-background:#111;
-color:white;
-margin:0;
+body {
+  font-family: Arial;
+  background:#f4f6f8;
+  padding:20px;
 }
-
-header{
-background:#1f1f1f;
-padding:20px;
-font-size:24px;
-text-align:center;
+.container {
+  max-width:500px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:10px;
 }
-
-.container{
-padding:20px;
-max-width:700px;
-margin:auto;
+input, select, textarea {
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  margin-bottom:15px;
 }
-
-input, select, textarea{
-
-width:100%;
-padding:10px;
-margin-bottom:12px;
-border-radius:8px;
-border:none;
-
+button {
+  width:100%;
+  padding:12px;
+  background:#4a90e2;
+  color:white;
+  border:none;
+  border-radius:6px;
 }
-
-.button{
-
-background:#6a5acd;
-padding:12px;
-text-align:center;
-border-radius:8px;
-cursor:pointer;
-border:none;
-color:white;
-width:100%;
-
-}
-
 </style>
-
 </head>
-
 <body>
 
-<header>Submit Trigger</header>
-
 <div class="container">
+<h2>Submit Trigger</h2>
 
-<input id="title" placeholder="Movie Title">
+<input id="title" placeholder="Title">
 
 <input id="year" placeholder="Year">
 
-<select id="category">
-
-<option>Gun violence</option>
-<option>Sexual assault</option>
-<option>Suicide / self-harm</option>
-<option>Child abuse</option>
-<option>Domestic violence</option>
-<option>Animal harm</option>
-<option>Substance abuse</option>
-<option>Eating disorders</option>
-<option>Medical trauma</option>
-<option>Death / dying</option>
-<option>Pregnancy / miscarriage</option>
-<option>Kidnapping</option>
-<option>Psychological abuse</option>
-<option>Grief</option>
-<option>Car accident</option>
-<option>Illness</option>
-<option>Mental health themes</option>
-<option>Bullying</option>
-<option>Infidelity</option>
-<option>Religious trauma</option>
-<option>Poverty</option>
-<option>Other</option>
-
+<select id="category" required>
+  <option value="">Select trigger category</option>
+  <option>Gun violence</option>
+  <option>Sexual assault</option>
+  <option>Suicide / self-harm</option>
+  <option>Child abuse</option>
+  <option>Domestic violence</option>
+  <option>Animal harm</option>
+  <option>Substance abuse</option>
+  <option>Eating disorders</option>
+  <option>Medical trauma</option>
+  <option>Death / dying</option>
+  <option>Pregnancy / miscarriage</option>
+  <option>Kidnapping</option>
+  <option>Psychological abuse</option>
+  <option>Grief (parent, child, animal loss)</option>
+  <option>Car accident</option>
+  <option>Illness (cancer, chronic illness)</option>
+  <option>Mental health themes</option>
+  <option>Bullying</option>
+  <option>Infidelity</option>
+  <option>Religious trauma</option>
+  <option>Poverty</option>
+  <option>Other</option>
 </select>
 
 <select id="severity">
-
 <option>Mild</option>
 <option>Moderate</option>
 <option>Severe</option>
-
 </select>
 
-<textarea id="desc" placeholder="Description"></textarea>
+<input id="timestamp" placeholder="Timestamp (00:00:00)">
 
-<button class="button" onclick="submitForm()">
-Submit
-</button>
+<textarea id="description" placeholder="Description"></textarea>
 
-<br><br>
+<input id="poster" placeholder="Poster URL">
 
-<a class="button" href="library.html">
-Back to Library
-</a>
+<button onclick="save()">Submit</button>
+
+<button onclick="location.href='index.html'">Back</button>
 
 </div>
 
 <script>
-
-function submitForm(){
-
+function save(){
 let entry = {
-
-title:
-document.getElementById("title").value,
-
-year:
-document.getElementById("year").value,
-
-category:
-document.getElementById("category").value,
-
-severity:
-document.getElementById("severity").value,
-
-desc:
-document.getElementById("desc").value,
-
-timestamp:
-Date.now()
-
+title: document.getElementById("title").value,
+year: document.getElementById("year").value,
+category: document.getElementById("category").value,
+severity: document.getElementById("severity").value,
+timestamp: document.getElementById("timestamp").value,
+description: document.getElementById("description").value,
+poster: document.getElementById("poster").value
 };
 
-let data =
-JSON.parse(localStorage.getItem("screenTriggers") || "[]");
+let library = JSON.parse(localStorage.getItem("library")||"[]");
+library.push(entry);
+localStorage.setItem("library", JSON.stringify(library));
 
-data.push(entry);
-
-localStorage.setItem(
-"screenTriggers",
-JSON.stringify(data)
-);
-
-alert("Submission saved!");
-
-window.location.href="library.html";
-
+alert("Saved!");
 }
-
 </script>
 
 </body>
