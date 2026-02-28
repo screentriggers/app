@@ -153,23 +153,6 @@ We hope this library can be one small tool to identify potentially distressing s
 
 </div>
 
-
-<div class="container" id="about" style="display:none;">
-
-<div class="card">
-<b>How To</b><br><br>
-
-On Android (Chrome): Open this app link in Chrome, tap the ⋮ menu in the top-right, then choose "Add to Home Screen" and "Install".<br><br>
-On iPhone (Safari): Open this app link in Safari, tap the "Share" icon (square with an up arrow), choose "Add to Home Screen", then tap "Add".<br><br>
-Once added to your home screen, Screen Triggers will open in its own window and feel much like an installed app from the Play Store or App Store.<br><br>
-
-</div>
-
-<a class="button" onclick="showHome()">Back</a>
-
-</div>
-
-
 <script>
 
 const data = [
@@ -216,17 +199,11 @@ hideAll();
 document.getElementById("about").style.display="block";
 }
 
-function showHow(){
-hideAll();
-document.getElementById("how").style.display="block";
-}
-
 function hideAll(){
 document.getElementById("home").style.display="none";
 document.getElementById("library").style.display="none";
 document.getElementById("submit").style.display="none";
 document.getElementById("about").style.display="none";
-document.getElementById("how").style.display="none"
 }
 
 
