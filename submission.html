@@ -1,107 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Submission Form - Screen Triggers</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Submit – Screen Triggers</title>
+
 <style>
 body {
   font-family: Arial;
-  background:#f4f6f8;
-  padding:20px;
+  background: #111;
+  color: white;
+  padding: 20px;
 }
-.container {
-  max-width:500px;
-  margin:auto;
-  background:white;
-  padding:20px;
-  border-radius:10px;
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: none;
 }
-input, select, textarea {
-  width:100%;
-  padding:10px;
-  margin-top:5px;
-  margin-bottom:15px;
-}
+
 button {
-  width:100%;
-  padding:12px;
-  background:#4a90e2;
-  color:white;
-  border:none;
-  border-radius:6px;
+  background: #00c853;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 16px;
 }
 </style>
 </head>
+
 <body>
 
-<div class="container">
-<h2>Submit Trigger</h2>
+<h2>Submit Entry</h2>
 
 <input id="title" placeholder="Title">
 
+<select id="type">
+<option>Movie</option>
+<option>TV</option>
+</select>
+
 <input id="year" placeholder="Year">
 
-<select id="category" required>
-  <option value="">Select trigger category</option>
-  <option>Gun violence</option>
-  <option>Sexual assault</option>
-  <option>Suicide / self-harm</option>
-  <option>Child abuse</option>
-  <option>Domestic violence</option>
-  <option>Animal harm</option>
-  <option>Substance abuse</option>
-  <option>Eating disorders</option>
-  <option>Medical trauma</option>
-  <option>Death / dying</option>
-  <option>Pregnancy / miscarriage</option>
-  <option>Kidnapping</option>
-  <option>Psychological abuse</option>
-  <option>Grief (parent, child, animal loss)</option>
-  <option>Car accident</option>
-  <option>Illness (cancer, chronic illness)</option>
-  <option>Mental health themes</option>
-  <option>Bullying</option>
-  <option>Infidelity</option>
-  <option>Religious trauma</option>
-  <option>Poverty</option>
-  <option>Other</option>
-</select>
-  
-<select id="severity">
-<option>Mild</option>
-<option>Moderate</option>
-<option>Severe</option>
-</select>
+<input id="categories" placeholder="Trigger categories">
 
-<input id="timestamp" placeholder="Timestamp (00:00:00)">
+<textarea id="notes" placeholder="Notes"></textarea>
 
-<textarea id="description" placeholder="Description"></textarea>
-
-<input id="poster" placeholder="Poster URL">
-
-<button onclick="save()">Submit</button><br><br>
-
-<button onclick="location.href='index.html'">Back</button>
-
-</div>
+<button onclick="submitEntry()">Submit</button>
 
 <script>
-function save(){
-let entry = {
-title: document.getElementById("title").value,
-year: document.getElementById("year").value,
-category: document.getElementById("category").value,
-severity: document.getElementById("severity").value,
-timestamp: document.getElementById("timestamp").value,
-description: document.getElementById("description").value,
-poster: document.getElementById("poster").value
-};
+function submitEntry() {
 
-let library = JSON.parse(localStorage.getItem("library")||"[]");
-library.push(entry);
-localStorage.setItem("library", JSON.stringify(library));
+  const entry = {
+    title: document.getElementById("title").value,
+    type: document.getElementById("type").value,
+    year: document.getElementById("year").value,
+    categories: document.getElementById("categories").value,
+    notes: document.getElementById("notes").value
+  };
 
-alert("Saved!");
+  let data = JSON.parse(localStorage.getItem("screenTriggers") || "[]");
+
+  data.push(entry);
+
+  localStorage.setItem("screenTriggers", JSON.stringify(data));
+
+  alert("Submitted successfully");
+
 }
 </script>
 
