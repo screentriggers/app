@@ -237,6 +237,12 @@ Once added to your home screen, Screen Triggers will open in its own window and 
 
 </div>
 
+<a class="button" onclick="showHome()">Back</a>
+
+</div>
+
+<script>
+
 function setActive(tab){
 
 document.querySelectorAll(".nav-button").forEach(btn=>{
@@ -246,12 +252,6 @@ btn.classList.remove("active");
 document.getElementById(tab).classList.add("active");
 
 }
-
-<a class="button" onclick="showHome()">Back</a>
-
-</div>
-
-<script>
 
 const data = [
 
