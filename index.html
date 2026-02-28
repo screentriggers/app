@@ -215,6 +215,10 @@ id="searchInput">
 <option>Poverty</option>
 <option>Other</option>
 </select>
+     
+<button class="button" onclick="clearFilters()" style="background:#999;">
+Clear Filters
+</button>
 
 <div id="results"></div>
 
@@ -379,13 +383,16 @@ document.getElementById("results").innerHTML=html;
 function filter(){
 
 let text = document.getElementById("searchInput").value.toLowerCase();
-let category = document.getElementById("categoryFilter").value;
+
+let selected = Array.from(document.getElementById("categoryFilter").selectedOptions)
+.map(option => option.value);
 
 let filtered = data.filter(item => {
 
 let matchesTitle = item.title.toLowerCase().includes(text);
 
-let matchesCategory = category === "" || item.category === category;
+let matchesCategory =
+selected.length === 0 || selected.includes(item.category);
 
 return matchesTitle && matchesCategory;
 
