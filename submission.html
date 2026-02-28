@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Submission Form - Screen Triggers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial;
+  background:#f4f6f8;
+  padding:20px;
+}
+.container {
+  max-width:500px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+}
+input, select, textarea {
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  margin-bottom:15px;
+}
+button {
+  width:100%;
+  padding:12px;
+  background:#4a90e2;
+  color:white;
+  border:none;
+  border-radius:6px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Submit Trigger</h2>
+
+<input id="title" placeholder="Title">
+
+<input id="year" placeholder="Year">
+
+<select id="category">
+<option>Violence</option>
+<option>Sexual Content</option>
+<option>Substance Use</option>
+<option>Self Harm</option>
+<option>Other</option>
+</select>
+
+<select id="severity">
+<option>Mild</option>
+<option>Moderate</option>
+<option>Severe</option>
+</select>
+
+<input id="timestamp" placeholder="Timestamp (00:00:00)">
+
+<textarea id="description" placeholder="Description"></textarea>
+
+<input id="poster" placeholder="Poster URL">
+
+<button onclick="save()">Submit</button>
+
+<button onclick="location.href='index.html'">Back</button>
+
+</div>
+
+<script>
+function save(){
+let entry = {
+title: document.getElementById("title").value,
+year: document.getElementById("year").value,
+category: document.getElementById("category").value,
+severity: document.getElementById("severity").value,
+timestamp: document.getElementById("timestamp").value,
+description: document.getElementById("description").value,
+poster: document.getElementById("poster").value
+};
+
+let library = JSON.parse(localStorage.getItem("library")||"[]");
+library.push(entry);
+localStorage.setItem("library", JSON.stringify(library));
+
+alert("Saved!");
+}
+</script>
+
+</body>
+</html>
