@@ -1,77 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Submit – Screen Triggers</title>
-
-<style>
-body {
-  font-family: Arial;
-  background: #111;
-  color: white;
-  padding: 20px;
-}
-
-input, textarea, select {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: none;
-}
-
-button {
-  background: #00c853;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  width: 100%;
-  font-size: 16px;
-}
-</style>
-</head>
-
-<body>
-
-<h2>Submit Entry</h2>
-
-<input id="title" placeholder="Title">
-
-<select id="type">
-<option>Movie</option>
-<option>TV</option>
-</select>
-
-<input id="year" placeholder="Year">
-
-<input id="categories" placeholder="Trigger categories">
-
-<textarea id="notes" placeholder="Notes"></textarea>
-
-<button onclick="submitEntry()">Submit</button>
-
 <script>
-function submitEntry() {
+function submitEntry(){
 
   const entry = {
     title: document.getElementById("title").value,
-    type: document.getElementById("type").value,
     year: document.getElementById("year").value,
-    categories: document.getElementById("categories").value,
-    notes: document.getElementById("notes").value
+    category: document.getElementById("category").value,
+    severity: document.getElementById("severity").value,
+    timestamp: document.getElementById("timestamp").value,
+    desc: document.getElementById("description").value,
+    poster: document.getElementById("poster").value
   };
 
-  let data = JSON.parse(localStorage.getItem("screenTriggers") || "[]");
+  let existing = JSON.parse(localStorage.getItem("screenTriggers") || "[]");
 
-  data.push(entry);
+  existing.push(entry);
 
-  localStorage.setItem("screenTriggers", JSON.stringify(data));
+  localStorage.setItem("screenTriggers", JSON.stringify(existing));
 
-  alert("Submitted successfully");
+  alert("Submission saved");
 
 }
 </script>
-
-</body>
-</html>
