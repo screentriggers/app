@@ -226,6 +226,27 @@ document.getElementById("results").innerHTML=html;
 
 }
 
+  // LOAD SUBMISSIONS FROM FORM
+function loadSubmissions(){
+
+  let submissions = JSON.parse(localStorage.getItem("screenTriggers") || "[]");
+
+  // Convert submission format to match library format
+  submissions.forEach(entry => {
+
+    data.push({
+      title: entry.title,
+      year: entry.year,
+      category: entry.categories,
+      severity: entry.severity || "",
+      timestamp: entry.timestamp || "",
+      desc: entry.notes || ""
+    });
+
+  });
+
+}
+
 
 function filter(){
 
@@ -235,6 +256,7 @@ let filtered=data.filter(item=>
 item.title.toLowerCase().includes(text)
 );
 
+loadSubmissions();
 render(filtered);
 
 }
