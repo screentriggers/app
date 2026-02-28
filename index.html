@@ -190,6 +190,32 @@ By contributing, users help build a culture of transparency around media - one w
 oninput="filter()"
 id="searchInput">
 
+<select class="search" id="categoryFilter" onchange="filter()">
+<option value="">All trigger categories</option>
+<option>Gun violence</option>
+<option>Sexual assault</option>
+<option>Suicide / self-harm</option>
+<option>Child abuse</option>
+<option>Domestic violence</option>
+<option>Animal harm</option>
+<option>Substance abuse</option>
+<option>Eating disorders</option>
+<option>Medical trauma</option>
+<option>Death / dying</option>
+<option>Pregnancy / miscarriage</option>
+<option>Kidnapping</option>
+<option>Psychological abuse</option>
+<option>Grief (parent, child, animal loss)</option>
+<option>Car accident</option>
+<option>Illness (cancer, chronic illness)</option>
+<option>Mental health themes</option>
+<option>Bullying</option>
+<option>Infidelity</option>
+<option>Religious trauma</option>
+<option>Poverty</option>
+<option>Other</option>
+</select>
+
 <div id="results"></div>
 
 <a class="button" onclick="showHome()">Back</a>
@@ -350,14 +376,20 @@ document.getElementById("results").innerHTML=html;
 
 }
 
-
 function filter(){
 
-let text=document.getElementById("searchInput").value.toLowerCase();
+let text = document.getElementById("searchInput").value.toLowerCase();
+let category = document.getElementById("categoryFilter").value;
 
-let filtered=data.filter(item=>
-item.title.toLowerCase().includes(text)
-);
+let filtered = data.filter(item => {
+
+let matchesTitle = item.title.toLowerCase().includes(text);
+
+let matchesCategory = category === "" || item.category === category;
+
+return matchesTitle && matchesCategory;
+
+});
 
 render(filtered);
 
