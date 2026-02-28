@@ -269,7 +269,7 @@ id="searchInput">
 
 <div class="filter-dropdown">
 
-<button class="filter-button" onclick="toggleDropdown()">
+<button id="filterButton" class="filter-button" onclick="toggleDropdown()">
 Filter by trigger category ▼
 </button>
 
@@ -501,6 +501,7 @@ selectedCategories = [];
 renderChips();
 
 render(data);
+updateFilterButton();
 
 }
 
@@ -538,6 +539,7 @@ selectedCategories.push(category);
 }
 
 filter();
+updateFilterButton();
 
 }
 
@@ -547,6 +549,28 @@ document.getElementById("filterPanel")
 .classList.toggle("show");
 
 }
+
+function updateFilterButton(){
+
+let count = selectedCategories.length;
+
+let text = "Filter by trigger category";
+
+if(count === 0){
+text += " ▼";
+}
+else if(count === 1){
+text += " (1 selected) ▼";
+}
+else{
+text += " (" + count + " selected) ▼";
+}
+
+document.getElementById("filterButton").innerText = text;
+
+}
+
+updateFilterButton();
 
 </script>
 
