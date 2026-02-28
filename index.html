@@ -175,6 +175,51 @@ margin-bottom:12px;
 width:100%;
 }
 
+.filter-dropdown{
+position:relative;
+margin-bottom:12px;
+}
+
+.filter-button{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ddd;
+background:white;
+text-align:left;
+cursor:pointer;
+}
+
+.filter-panel{
+display:none;
+position:absolute;
+top:100%;
+left:0;
+right:0;
+background:white;
+border:1px solid #ddd;
+border-radius:10px;
+max-height:250px;
+overflow-y:auto;
+z-index:1000;
+padding:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.filter-panel label{
+display:block;
+padding:6px;
+cursor:pointer;
+}
+
+.filter-panel input{
+margin-right:8px;
+}
+
+.filter-panel.show{
+display:block;
+}
+
 </style>
 </head>
 
@@ -222,7 +267,16 @@ By contributing, users help build a culture of transparency around media - one w
 oninput="filter()"
 id="searchInput">
 
-<div id="chipContainer" class="chip-container"></div>
+<div class="filter-dropdown">
+
+<button class="filter-button" onclick="toggleDropdown()">
+Filter by trigger category ▼
+</button>
+
+<div id="filterPanel" class="filter-panel">
+</div>
+
+</div>
 
 <button class="clear-button" onclick="clearFilters()">
 Clear Filters
@@ -456,21 +510,25 @@ let html="";
 
 categories.forEach(cat=>{
 
-let active = selectedCategories.includes(cat) ? "active" : "";
+let checked = selectedCategories.includes(cat) ? "checked" : "";
 
 html += `
-<div class="chip ${active}" onclick="toggleChip('${cat}')">
+<label>
+<input type="checkbox"
+value="${cat}"
+${checked}
+onchange="toggleCategory(this.value)">
 ${cat}
-</div>
+</label>
 `;
 
 });
 
-document.getElementById("chipContainer").innerHTML = html;
+document.getElementById("filterPanel").innerHTML = html;
 
 }
 
-function toggleChip(category){
+function toggleCategory(category){
 
 if(selectedCategories.includes(category)){
 selectedCategories =
@@ -479,8 +537,14 @@ selectedCategories.filter(c => c !== category);
 selectedCategories.push(category);
 }
 
-renderChips();
 filter();
+
+}
+
+function toggleDropdown(){
+
+document.getElementById("filterPanel")
+.classList.toggle("show");
 
 }
 
