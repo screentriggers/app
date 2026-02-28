@@ -237,6 +237,16 @@ Once added to your home screen, Screen Triggers will open in its own window and 
 
 </div>
 
+function setActive(tab){
+
+document.querySelectorAll(".nav-button").forEach(btn=>{
+btn.classList.remove("active");
+});
+
+document.getElementById(tab).classList.add("active");
+
+}
+
 <a class="button" onclick="showHome()">Back</a>
 
 </div>
@@ -265,33 +275,37 @@ desc:"Mass casualty sinking"
 
 ];
 
-
 function showHome(){
 hideAll();
 document.getElementById("home").style.display="block";
+setActive("nav-home");
 }
 
 function showLibrary(){
 hideAll();
 document.getElementById("library").style.display="block";
 render(data);
+setActive("nav-library");
 }
 
 function showSubmit(){
 hideAll();
 document.getElementById("submit").style.display="block";
+setActive("nav-submit");
 }
 
 function showAbout(){
 hideAll();
 document.getElementById("about").style.display="block";
+setActive("nav-about");
 }
 
 function showHow(){
 hideAll();
 document.getElementById("how").style.display="block";
+setActive("nav-how");
 }
-
+     
 function hideAll(){
 document.getElementById("home").style.display="none";
 document.getElementById("library").style.display="none";
