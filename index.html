@@ -124,6 +124,25 @@ font-size:22px;
 margin-bottom:2px;
 }
 
+.nav-button{
+flex:1;
+text-align:center;
+font-size:12px;
+color:#444;
+text-decoration:none;
+padding-top:6px;
+padding-bottom:6px;
+}
+
+.nav-button.active{
+color:#4a90e2;
+font-weight:600;
+}
+
+.nav-button.active div{
+transform:scale(1.15);
+}
+
 </style>
 </head>
 
@@ -334,27 +353,27 @@ render(filtered);
 
 <div class="bottom-nav">
 
-<a class="nav-button" onclick="showHome()">
+<a id="nav-home" class="nav-button active" onclick="showHome()">
 <div>🏠</div>
 Home
 </a>
 
-<a class="nav-button" onclick="showLibrary()">
+<a id="nav-library" class="nav-button" onclick="showLibrary()">
 <div>📽</div>
 Library
 </a>
 
-<a class="nav-button" href="/app/submission.html">
+<a id="nav-submit" class="nav-button" href="/app/submission.html">
 <div>📜</div>
 Submit
 </a>
 
-<a class="nav-button" onclick="showAbout()">
+<a id="nav-about" class="nav-button" onclick="showAbout()">
 <div>ℹ️</div>
 About
 </a>
 
-<a class="nav-button" onclick="showHow()">
+<a id="nav-how" class="nav-button" onclick="showHow()">
 <div>❓</div>
 How
 </a>
