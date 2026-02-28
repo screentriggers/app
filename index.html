@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Screen Triggers</title>
 
 <link rel="manifest" href="manifest.json">
 
 <style>
+
 body{
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 background:#f4f6f8;
@@ -64,6 +66,7 @@ color:#666;
 font-size:14px;
 margin-top:4px;
 }
+
 </style>
 </head>
 
@@ -72,6 +75,9 @@ margin-top:4px;
 <header>
 🎥 Screen Triggers
 </header>
+
+
+<!-- HOME -->
 
 <div class="container" id="home">
 
@@ -83,7 +89,9 @@ Know what’s ahead. Watch with confidence.
 
 <a class="button" onclick="showLibrary()">Library</a>
 
-<a class="button" href="/app/submission.html">Submission Form</a>
+<a class="button" href="/app/submission.html">
+Submission Form
+</a>
 
 <a class="button" href="https://ko-fi.com/" target="_blank">
 Support This Project
@@ -94,9 +102,13 @@ Support This Project
 </div>
 
 
+
+<!-- LIBRARY -->
+
 <div class="container" id="library" style="display:none;">
 
-<input class="search" placeholder="Search title..."
+<input class="search"
+placeholder="Search title..."
 oninput="filter()"
 id="searchInput">
 
@@ -107,26 +119,24 @@ id="searchInput">
 </div>
 
 
-<div class="container" id="submit" style="display:none;">
 
-<div class="card">
-Submission form coming next.
-</div>
-
-<a class="button" onclick="showHome()">Back</a>
-
-</div>
-
+<!-- ABOUT -->
 
 <div class="container" id="about" style="display:none;">
 
 <div class="card">
+
 <b>About This Project</b><br><br>
 
-Trigger Library was created to help viewers navigate potentially triggering content in movies and TV shows. By collecting community-submitted notes about specific scenes, we aim to give people more context before they press play. <br><br>
-This project is community-driven: entries are written by volunteers who share what stood out to them. It is not a complete or definitive record of every trigger in a title, and different people may experience the same scene very differently.<br><br>
-Nothing on this site is a substitute for professional mental health care or crisis support. If you are struggling, please reach out to a trusted professional, support line, or community resource in your area.<br><br>
-We hope this library can be one small tool to identify potentially distressing scenes in films and shows to support safer, more informed viewing for everyone.
+Trigger Library was created to help viewers navigate potentially triggering content in movies and TV shows.
+
+<br><br>
+
+This project is community-driven and helps viewers identify distressing scenes.
+
+<br><br>
+
+This is not a substitute for professional care.
 
 </div>
 
@@ -138,7 +148,10 @@ We hope this library can be one small tool to identify potentially distressing s
 
 <script>
 
-const data = [
+
+/* STARTER DATA */
+
+let data = [
 
 {
 title:"The Lion King",
@@ -152,7 +165,7 @@ desc:"Death of parent"
 {
 title:"Titanic",
 year:"1997",
-category:"Death",
+category:"Death / dying",
 severity:"Severe",
 time:"02:40:00",
 desc:"Mass casualty sinking"
@@ -161,34 +174,80 @@ desc:"Mass casualty sinking"
 ];
 
 
-function showHome(){
-hideAll();
-document.getElementById("home").style.display="block";
+
+/* LOAD SUBMISSIONS */
+
+function loadSubmissions(){
+
+let saved =
+JSON.parse(localStorage.getItem("screenTriggers") || "[]");
+
+saved.forEach(entry => {
+
+data.push({
+
+title: entry.title,
+year: entry.year,
+category: entry.category,
+severity: entry.severity,
+time: entry.timestamp,
+desc: entry.desc
+
+});
+
+});
+
 }
+
+
+
+/* NAVIGATION */
+
+function showHome(){
+
+hideAll();
+
+document.getElementById("home").style.display="block";
+
+}
+
+
 
 function showLibrary(){
+
 hideAll();
+
 document.getElementById("library").style.display="block";
+
+loadSubmissions();
+
 render(data);
+
 }
 
-function showSubmit(){
-hideAll();
-document.getElementById("submit").style.display="block";
-}
+
 
 function showAbout(){
+
 hideAll();
+
 document.getElementById("about").style.display="block";
+
 }
+
+
 
 function hideAll(){
+
 document.getElementById("home").style.display="none";
 document.getElementById("library").style.display="none";
-document.getElementById("submit").style.display="none";
 document.getElementById("about").style.display="none";
+
 }
 
+
+
+/* DISPLAY LIBRARY */
 
 function render(list){
 
@@ -197,9 +256,12 @@ let html="";
 list.forEach(item=>{
 
 html+=`
+
 <div class="card">
 
-<div><b>🎥 ${item.title} (${item.year})</b></div>
+<div>
+<b>🎥 ${item.title} (${item.year})</b>
+</div>
 
 <div class="small">
 Trigger Category: ${item.category}
@@ -218,6 +280,7 @@ ${item.desc}
 </div>
 
 </div>
+
 `;
 
 });
@@ -226,67 +289,28 @@ document.getElementById("results").innerHTML=html;
 
 }
 
-  // LOAD SUBMISSIONS FROM FORM
-function loadSubmissions(){
 
-  let submissions = JSON.parse(localStorage.getItem("screenTriggers") || "[]");
 
-  // Convert submission format to match library format
-  submissions.forEach(entry => {
-
-    data.push({
-      title: entry.title,
-      year: entry.year,
-      category: entry.categories,
-      severity: entry.severity || "",
-      timestamp: entry.timestamp || "",
-      desc: entry.notes || ""
-    });
-
-  });
-
-}
-
+/* SEARCH */
 
 function filter(){
 
-let text=document.getElementById("searchInput").value.toLowerCase();
+let text =
+document.getElementById("searchInput")
+.value
+.toLowerCase();
 
-let filtered=data.filter(item=>
+let filtered =
+data.filter(item =>
 item.title.toLowerCase().includes(text)
 );
 
-  <script>
-
-function loadSubmissions(){
-
-  let saved = JSON.parse(localStorage.getItem("screenTriggers") || "[]");
-
-  saved.forEach(item => {
-    data.push(item);
-  });
-
-}
-
-</script>
-
-  function showLibrary(){
-
-  document.getElementById("home").style.display="none";
-  document.getElementById("library").style.display="block";
-
-  loadSubmissions();
-  render(data);
-
-}
-
-loadSubmissions();
 render(filtered);
 
 }
 
-</script>
 
+</script>
 
 </body>
 </html>
