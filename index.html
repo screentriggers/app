@@ -153,6 +153,24 @@ We hope this library can be one small tool to identify potentially distressing s
 
 </div>
 
+<div class="container" id="how" style="display:none;">
+
+<div class="card">
+<b>How To Use Screen Triggers</b><br><br>
+
+• Tap <b>Browse Library</b> to search titles<br>
+• Tap a title to view trigger timestamps<br>
+• Tap <b>Submit a Trigger Entry</b> to contribute<br>
+• Use the search box to quickly find a movie or show<br><br>
+
+This platform grows stronger with community contributions.
+
+</div>
+
+<a class="button" onclick="showHome()">Back</a>
+
+</div>
+
 <script>
 
 const data = [
@@ -199,13 +217,18 @@ hideAll();
 document.getElementById("about").style.display="block";
 }
 
+function showHow(){
+hideAll();
+document.getElementById("how").style.display="block";
+}
+
 function hideAll(){
 document.getElementById("home").style.display="none";
 document.getElementById("library").style.display="none";
 document.getElementById("submit").style.display="none";
 document.getElementById("about").style.display="none";
+document.getElementById("how").style.display="none";
 }
-
 
 function render(list){
 
