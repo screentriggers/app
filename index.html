@@ -256,6 +256,30 @@ let filtered=data.filter(item=>
 item.title.toLowerCase().includes(text)
 );
 
+  <script>
+
+function loadSubmissions(){
+
+  let saved = JSON.parse(localStorage.getItem("screenTriggers") || "[]");
+
+  saved.forEach(item => {
+    data.push(item);
+  });
+
+}
+
+</script>
+
+  function showLibrary(){
+
+  document.getElementById("home").style.display="none";
+  document.getElementById("library").style.display="block";
+
+  loadSubmissions();
+  render(data);
+
+}
+
 loadSubmissions();
 render(filtered);
 
