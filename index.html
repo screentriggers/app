@@ -541,8 +541,12 @@ selectedCategories.push(category);
 filter();
 updateFilterButton();
 
-}
+/* CLOSE DROPDOWN */
+document.getElementById("filterPanel")
+.classList.remove("show");
 
+}
+     
 function toggleDropdown(){
 
 document.getElementById("filterPanel")
