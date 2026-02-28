@@ -1,1 +1,137 @@
-[]
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Screen Triggers</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#111;
+color:white;
+margin:0;
+}
+
+header{
+background:#1f1f1f;
+padding:20px;
+font-size:24px;
+text-align:center;
+}
+
+.container{
+padding:20px;
+max-width:700px;
+margin:auto;
+}
+
+.card{
+background:#1e1e1e;
+padding:15px;
+margin-bottom:15px;
+border-radius:10px;
+}
+
+.button{
+display:block;
+background:#6a5acd;
+padding:12px;
+margin-top:10px;
+text-align:center;
+border-radius:8px;
+cursor:pointer;
+text-decoration:none;
+color:white;
+}
+
+.search{
+width:100%;
+padding:10px;
+margin-bottom:15px;
+border-radius:8px;
+border:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>🎥 Screen Triggers</header>
+
+<div class="container">
+
+<input
+class="search"
+placeholder="Search title..."
+id="searchInput"
+oninput="filter()"
+>
+
+<div id="results"></div>
+
+<a class="button" href="submission.html">Add Submission</a>
+
+</div>
+
+<script>
+
+let data = JSON.parse(localStorage.getItem("screenTriggers") || "[]");
+
+render(data);
+
+function render(list){
+
+let html = "";
+
+list.reverse().forEach(item => {
+
+html += `
+<div class="card">
+
+<div style="font-size:18px;font-weight:bold;">
+${item.title} (${item.year})
+</div>
+
+<div>
+Category: ${item.category}
+</div>
+
+<div>
+Severity: ${item.severity}
+</div>
+
+<div>
+${item.desc}
+</div>
+
+</div>
+`;
+
+});
+
+document.getElementById("results").innerHTML = html;
+
+}
+
+function filter(){
+
+let text =
+document.getElementById("searchInput")
+.value
+.toLowerCase();
+
+let filtered =
+data.filter(item =>
+item.title.toLowerCase().includes(text)
+);
+
+render(filtered);
+
+}
+
+</script>
+
+</body>
+</html>
