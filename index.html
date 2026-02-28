@@ -402,6 +402,20 @@ render(filtered);
 
 }
 
+function clearFilters(){
+
+document.getElementById("searchInput").value = "";
+
+let select = document.getElementById("categoryFilter");
+
+Array.from(select.options).forEach(option=>{
+option.selected = false;
+});
+
+render(data);
+
+}
+
 </script>
 
 <div class="bottom-nav">
