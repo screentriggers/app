@@ -143,6 +143,38 @@ font-weight:600;
 transform:scale(1.15);
 }
 
+.chip-container{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:12px;
+}
+
+.chip{
+padding:8px 12px;
+border-radius:20px;
+background:#e0e3e7;
+font-size:14px;
+cursor:pointer;
+user-select:none;
+}
+
+.chip.active{
+background:#4a90e2;
+color:white;
+font-weight:600;
+}
+
+.clear-button{
+background:#999;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+margin-bottom:12px;
+width:100%;
+}
+
 </style>
 </head>
 
@@ -190,33 +222,9 @@ By contributing, users help build a culture of transparency around media - one w
 oninput="filter()"
 id="searchInput">
 
-<select class="search" id="categoryFilter" multiple onchange="filter()" style="height:140px;">
-<option value="">All trigger categories</option>
-<option>Gun violence</option>
-<option>Sexual assault</option>
-<option>Suicide / self-harm</option>
-<option>Child abuse</option>
-<option>Domestic violence</option>
-<option>Animal harm</option>
-<option>Substance abuse</option>
-<option>Eating disorders</option>
-<option>Medical trauma</option>
-<option>Death / dying</option>
-<option>Pregnancy / miscarriage</option>
-<option>Kidnapping</option>
-<option>Psychological abuse</option>
-<option>Grief (parent, child, animal loss)</option>
-<option>Car accident</option>
-<option>Illness (cancer, chronic illness)</option>
-<option>Mental health themes</option>
-<option>Bullying</option>
-<option>Infidelity</option>
-<option>Religious trauma</option>
-<option>Poverty</option>
-<option>Other</option>
-</select>
-     
-<button class="button" onclick="clearFilters()" style="background:#999;">
+<div id="chipContainer" class="chip-container"></div>
+
+<button class="clear-button" onclick="clearFilters()">
 Clear Filters
 </button>
 
@@ -305,6 +313,33 @@ desc:"Mass casualty sinking"
 
 ];
 
+const categories = [
+"Gun violence",
+"Sexual assault",
+"Suicide / self-harm",
+"Child abuse",
+"Domestic violence",
+"Animal harm",
+"Substance abuse",
+"Eating disorders",
+"Medical trauma",
+"Death / dying",
+"Pregnancy / miscarriage",
+"Kidnapping",
+"Psychological abuse",
+"Grief (parent, child, animal loss)",
+"Car accident",
+"Illness (cancer, chronic illness)",
+"Mental health themes",
+"Bullying",
+"Infidelity",
+"Religious trauma",
+"Poverty",
+"Other"
+];
+
+let selectedCategories = [];
+
 function showHome(){
 hideAll();
 document.getElementById("home").style.display="block";
@@ -314,6 +349,7 @@ setActive("nav-home");
 function showLibrary(){
 hideAll();
 document.getElementById("library").style.display="block";
+renderChips();
 render(data);
 setActive("nav-library");
 }
@@ -382,17 +418,17 @@ document.getElementById("results").innerHTML=html;
 
 function filter(){
 
-let text = document.getElementById("searchInput").value.toLowerCase();
-
-let selected = Array.from(document.getElementById("categoryFilter").selectedOptions)
-.map(option => option.value);
+let text =
+document.getElementById("searchInput").value.toLowerCase();
 
 let filtered = data.filter(item => {
 
-let matchesTitle = item.title.toLowerCase().includes(text);
+let matchesTitle =
+item.title.toLowerCase().includes(text);
 
 let matchesCategory =
-selected.length === 0 || selected.includes(item.category);
+selectedCategories.length === 0 ||
+selectedCategories.includes(item.category);
 
 return matchesTitle && matchesCategory;
 
@@ -406,13 +442,45 @@ function clearFilters(){
 
 document.getElementById("searchInput").value = "";
 
-let select = document.getElementById("categoryFilter");
+selectedCategories = [];
 
-Array.from(select.options).forEach(option=>{
-option.selected = false;
-});
+renderChips();
 
 render(data);
+
+}
+
+function renderChips(){
+
+let html="";
+
+categories.forEach(cat=>{
+
+let active = selectedCategories.includes(cat) ? "active" : "";
+
+html += `
+<div class="chip ${active}" onclick="toggleChip('${cat}')">
+${cat}
+</div>
+`;
+
+});
+
+document.getElementById("chipContainer").innerHTML = html;
+
+}
+
+function toggleChip(category){
+
+if(selectedCategories.includes(category)){
+selectedCategories =
+selectedCategories.filter(c => c !== category);
+}else{
+selectedCategories.push(category);
+}
+
+renderChips();
+filter();
 
 }
 
