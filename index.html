@@ -5,20 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Screen Triggers</title>
 
+<link rel="manifest" href="manifest.json">
+
 <style>
 body{
-font-family:Arial,sans-serif;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 background:#f4f6f8;
 margin:0;
+padding:0;
+color:#222;
 }
 
 header{
-background:#fff;
+background:#ffffff;
 padding:20px;
 text-align:center;
 font-size:24px;
-font-weight:bold;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
+font-weight:600;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
 }
 
 .container{
@@ -28,35 +32,36 @@ margin:auto;
 }
 
 .card{
-background:#fff;
-padding:14px;
-margin-bottom:10px;
-border-radius:10px;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
+background:white;
+padding:16px;
+margin-bottom:12px;
+border-radius:12px;
+box-shadow:0 2px 6px rgba(0,0,0,0.08);
 }
 
 .button{
 display:block;
 background:#4a90e2;
-color:#fff;
+color:white;
 text-align:center;
-padding:12px;
-border-radius:8px;
-margin-bottom:10px;
+padding:14px;
+border-radius:10px;
 text-decoration:none;
+margin-bottom:10px;
+font-weight:500;
 }
 
 .search{
 width:100%;
-padding:10px;
-margin-bottom:10px;
-border-radius:8px;
-border:1px solid #ccc;
+padding:12px;
+margin-bottom:12px;
+border-radius:10px;
+border:1px solid #ddd;
 }
 
 .small{
+color:#666;
 font-size:14px;
-color:#555;
 margin-top:4px;
 }
 </style>
@@ -64,63 +69,132 @@ margin-top:4px;
 
 <body>
 
-<header>🎥 Screen Triggers</header>
+<header>
+🎥 Screen Triggers
+</header>
 
-<div class="container">
+<div class="container" id="home">
 
-<a class="button" href="submission.html">Submission Form</a>
+<div class="card">
+<div style="font-size:18px;font-weight:600;margin-bottom:6px;">
+Know what’s ahead. Watch with confidence.
+</div>
+</div>
 
-<input class="search" id="search" placeholder="Search title..." oninput="render()">
+<a class="button" onclick="showLibrary()">Library</a>
 
-<div id="library"></div>
+<a class="button" onclick="showSubmit()">Submission Form</a>
+
+<a class="button" href="https://ko-fi.com/" target="_blank">
+Support This Project
+</a>
+
+<a class="button" onclick="showAbout()">About</a>
 
 </div>
 
 
+<div class="container" id="library" style="display:none;">
+
+<input class="search" placeholder="Search title..."
+oninput="filter()"
+id="searchInput">
+
+<div id="results"></div>
+
+<a class="button" onclick="showHome()">Back</a>
+
+</div>
+
+
+<div class="container" id="submit" style="display:none;">
+
+<div class="card">
+Submission form coming next.
+</div>
+
+<a class="button" onclick="showHome()">Back</a>
+
+</div>
+
+
+<div class="container" id="about" style="display:none;">
+
+<div class="card">
+<b>About This Project</b><br><br>
+
+Trigger Library was created to help viewers navigate potentially triggering content in movies and TV shows.<br><br>
+
+This project is community-driven and not complete.<br><br>
+
+Not a substitute for professional care.
+</div>
+
+<a class="button" onclick="showHome()">Back</a>
+
+</div>
+
+
+
 <script>
 
-
-/* LOAD DATA */
-
-function getLibrary(){
-
-let builtIn = [
+const data = [
 
 {
 title:"The Lion King",
 year:"1994",
-category:"Grief (parent, child, animal loss)",
+category:"Grief (parent loss)",
 severity:"Severe",
-timestamp:"00:30:45",
+time:"00:30:45",
 desc:"Death of parent"
+},
+
+{
+title:"Titanic",
+year:"1997",
+category:"Death",
+severity:"Severe",
+time:"02:40:00",
+desc:"Mass casualty sinking"
 }
 
 ];
 
-let saved =
-JSON.parse(localStorage.getItem("screenTriggers") || "[]");
 
-return builtIn.concat(saved);
+function showHome(){
+hideAll();
+document.getElementById("home").style.display="block";
+}
 
+function showLibrary(){
+hideAll();
+document.getElementById("library").style.display="block";
+render(data);
+}
+
+function showSubmit(){
+hideAll();
+document.getElementById("submit").style.display="block";
+}
+
+function showAbout(){
+hideAll();
+document.getElementById("about").style.display="block";
+}
+
+function hideAll(){
+document.getElementById("home").style.display="none";
+document.getElementById("library").style.display="none";
+document.getElementById("submit").style.display="none";
+document.getElementById("about").style.display="none";
 }
 
 
-
-/* DISPLAY */
-
-function render(){
-
-let search =
-document.getElementById("search").value.toLowerCase();
-
-let library =
-getLibrary();
+function render(list){
 
 let html="";
 
-library.forEach(item=>{
-
-if(item.title.toLowerCase().includes(search)){
+list.forEach(item=>{
 
 html+=`
 <div class="card">
@@ -136,7 +210,7 @@ Severity: ${item.severity}
 </div>
 
 <div class="small">
-Timestamp: ${item.timestamp}
+Timestamp: ${item.time}
 </div>
 
 <div class="small">
@@ -146,20 +220,27 @@ ${item.desc}
 </div>
 `;
 
-}
-
 });
 
-document.getElementById("library").innerHTML=html;
+document.getElementById("results").innerHTML=html;
 
 }
 
 
-/* START */
+function filter(){
 
-render();
+let text=document.getElementById("searchInput").value.toLowerCase();
+
+let filtered=data.filter(item=>
+item.title.toLowerCase().includes(text)
+);
+
+render(filtered);
+
+}
 
 </script>
+
 
 </body>
 </html>
