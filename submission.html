@@ -1,49 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Submit – Screen Triggers</title>
+<title>Submit Trigger</title>
 
 <style>
+
 body{
 font-family:Arial;
-background:#f4f6f8;
-padding:16px;
+background:#111;
+color:white;
+margin:0;
 }
 
-input,select,textarea{
-width:100%;
-padding:10px;
-margin-bottom:10px;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
-button{
-background:#4a90e2;
-color:#fff;
-padding:12px;
-border:none;
-border-radius:8px;
-width:100%;
-}
-
-a{
-display:block;
-margin-top:10px;
+header{
+background:#1f1f1f;
+padding:20px;
+font-size:24px;
 text-align:center;
 }
+
+.container{
+padding:20px;
+max-width:700px;
+margin:auto;
+}
+
+input, select, textarea{
+
+width:100%;
+padding:10px;
+margin-bottom:12px;
+border-radius:8px;
+border:none;
+
+}
+
+.button{
+
+background:#6a5acd;
+padding:12px;
+text-align:center;
+border-radius:8px;
+cursor:pointer;
+border:none;
+color:white;
+width:100%;
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<h2>Submit Entry</h2>
+<header>Submit Trigger</header>
 
-<input id="title" placeholder="Title" required>
+<div class="container">
 
-<input id="year" placeholder="Year" required>
+<input id="title" placeholder="Movie Title">
+
+<input id="year" placeholder="Year">
 
 <select id="category">
 
@@ -60,9 +78,9 @@ text-align:center;
 <option>Pregnancy / miscarriage</option>
 <option>Kidnapping</option>
 <option>Psychological abuse</option>
-<option>Grief (parent, child, animal loss)</option>
+<option>Grief</option>
 <option>Car accident</option>
-<option>Illness (cancer, chronic illness)</option>
+<option>Illness</option>
 <option>Mental health themes</option>
 <option>Bullying</option>
 <option>Infidelity</option>
@@ -80,18 +98,23 @@ text-align:center;
 
 </select>
 
-<input id="timestamp" placeholder="Timestamp (00:00:00)">
-
 <textarea id="desc" placeholder="Description"></textarea>
 
-<button onclick="submitEntry()">Submit</button>
+<button class="button" onclick="submitForm()">
+Submit
+</button>
 
-<a href="index.html">Back to Library</a>
+<br><br>
 
+<a class="button" href="library.html">
+Back to Library
+</a>
+
+</div>
 
 <script>
 
-function submitEntry(){
+function submitForm(){
 
 let entry = {
 
@@ -107,25 +130,27 @@ document.getElementById("category").value,
 severity:
 document.getElementById("severity").value,
 
-timestamp:
-document.getElementById("timestamp").value,
-
 desc:
-document.getElementById("desc").value
+document.getElementById("desc").value,
+
+timestamp:
+Date.now()
 
 };
 
-
-let saved =
+let data =
 JSON.parse(localStorage.getItem("screenTriggers") || "[]");
 
-saved.push(entry);
+data.push(entry);
 
-localStorage.setItem("screenTriggers", JSON.stringify(saved));
+localStorage.setItem(
+"screenTriggers",
+JSON.stringify(data)
+);
 
-alert("Submission saved");
+alert("Submission saved!");
 
-window.location.href="index.html";
+window.location.href="library.html";
 
 }
 
