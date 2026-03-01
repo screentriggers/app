@@ -561,7 +561,11 @@ item.title.toLowerCase().includes(text);
 
 let matchesCategory =
 selectedCategories.length === 0 ||
-selectedCategories.includes(item.category);
+(
+Array.isArray(item.category)
+? item.category.some(cat => selectedCategories.includes(cat))
+: selectedCategories.includes(item.category)
+);
 
 return matchesTitle && matchesCategory;
 
