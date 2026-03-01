@@ -756,20 +756,27 @@ window.onload = function(){
 
 showHome();
 
-/* hide splash after 1.2 seconds */
-setTimeout(()=>{
-document.getElementById("splash").classList.add("hide");
-},1200);
+const splash = document.getElementById("splash");
+
+/* check if first launch */
+const hasLaunched = localStorage.getItem("hasLaunched");
+
+if(!hasLaunched){
+
+    /* FIRST TIME → show splash */
+    setTimeout(()=>{
+        splash.classList.add("hide");
+    }, 1400);
+
+    localStorage.setItem("hasLaunched", "true");
+
+}else{
+
+    /* NOT first time → hide instantly */
+    splash.style.display = "none";
+
+}
 
 };
 </script>
-</body>
-
-<!-- SPLASH SCREEN -->
-<div id="splash">
-    <div class="splash-content">
-        <div class="splash-icon">🎬</div>
-        <div class="splash-title">Screen Triggers</div>
-    </div>
-</div>
 </html>
