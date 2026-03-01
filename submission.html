@@ -110,9 +110,6 @@ h2 {
   <option value="Poverty">Poverty</option>
   <option value="Other">Other</option>
 </select>
-<div id="categoryCount" style="margin-top:-5px; margin-bottom:15px;">
-0 categories selected
-</div>
 
 <div class="note">
 Hold CTRL (Windows) or tap multiple items (mobile) to select more than one
@@ -137,32 +134,6 @@ Hold CTRL (Windows) or tap multiple items (mobile) to select more than one
 
   
 <script>
-  
-const categorySelect = document.getElementById("category");
-const categoryCount = document.getElementById("categoryCount");
-
-/* Update count display */
-function updateCategoryCount(){
-
-  const count = categorySelect.selectedOptions.length;
-
-  if(count === 0){
-    categoryCount.innerText = "0 categories selected";
-  }
-  else if(count === 1){
-    categoryCount.innerText = "1 category selected";
-  }
-  else{
-    categoryCount.innerText = count + " categories selected";
-  }
-
-}
-
-/* Run when selection changes */
-categorySelect.addEventListener("change", updateCategoryCount);
-
-/* Run once on page load */
-updateCategoryCount();
   
 function save(){
 
