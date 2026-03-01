@@ -801,18 +801,10 @@ function installApp(){
 </script>
      
 <script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/app/sw.js')
-      .then(reg => {
-        console.log("Service worker registered:", reg.scope);
-      })
-      .catch(err => {
-        console.log("Service worker failed:", err);
-      });
-  });
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/app/sw.js")
+    .then(() => console.log("Service Worker registered"));
 }
 </script>
-     
 </body>
 </html>
