@@ -38,6 +38,41 @@ h2 {
   margin-bottom:16px;
 }
 
+.dropdown {
+  position: relative;
+  margin-bottom:15px;
+}
+
+.dropdown-button {
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  background:white;
+  cursor:pointer;
+}
+
+.dropdown-content {
+  display:none;
+  position:absolute;
+  background:white;
+  border:1px solid #ccc;
+  border-radius:6px;
+  width:100%;
+  max-height:200px;
+  overflow-y:auto;
+  z-index:1000;
+}
+
+.dropdown-content label {
+  display:block;
+  padding:8px;
+  cursor:pointer;
+}
+
+.dropdown-content label:hover {
+  background:#f0f0f0;
+}
+
 </style>
 </head>
 <body>
@@ -49,56 +84,86 @@ h2 {
 
 <input id="year" placeholder="Year">
 
-<select id="category" multiple required size="8">
-  <option value="">Select trigger category</option>
-  <option>Gun violence</option>
-  <option>Sexual assault</option>
-  <option>Suicide / self-harm</option>
-  <option>Child abuse</option>
-  <option>Domestic violence</option>
-  <option>Animal harm</option>
-  <option>Substance abuse</option>
-  <option>Eating disorders</option>
-  <option>Medical trauma</option>
-  <option>Death / dying</option>
-  <option>Pregnancy / miscarriage</option>
-  <option>Kidnapping</option>
-  <option>Psychological abuse</option>
-  <option>Grief (parent, child, animal loss)</option>
-  <option>Car accident</option>
-  <option>Illness (cancer, chronic illness)</option>
-  <option>Mental health themes</option>
-  <option>Bullying</option>
-  <option>Infidelity</option>
-  <option>Religious trauma</option>
-  <option>Poverty</option>
-  <option>Other</option>
-</select>
+<div class="dropdown">
+  <div class="dropdown-button" onclick="toggleDropdown()" id="dropdownButton">
+    Select trigger categories
+  </div>
 
-<select id="severity">
-<option>Mild</option>
-<option>Moderate</option>
-<option>Severe</option>
-</select>
+  <div class="dropdown-content" id="dropdownContent">
 
-<input id="timestamp" placeholder="Timestamp (00:00:00)">
+<label><input type="checkbox" value="Gun violence"> Gun violence</label>
+<label><input type="checkbox" value="Sexual assault"> Sexual assault</label>
+<label><input type="checkbox" value="Suicide / self-harm"> Suicide / self-harm</label>
+<label><input type="checkbox" value="Child abuse"> Child abuse</label>
+<label><input type="checkbox" value="Domestic violence"> Domestic violence</label>
+<label><input type="checkbox" value="Animal harm"> Animal harm</label>
+<label><input type="checkbox" value="Substance abuse"> Substance abuse</label>
+<label><input type="checkbox" value="Eating disorders"> Eating disorders</label>
+<label><input type="checkbox" value="Medical trauma"> Medical trauma</label>
+<label><input type="checkbox" value="Death / dying"> Death / dying</label>
+<label><input type="checkbox" value="Pregnancy / miscarriage"> Pregnancy / miscarriage</label>
+<label><input type="checkbox" value="Kidnapping"> Kidnapping</label>
+<label><input type="checkbox" value="Psychological abuse"> Psychological abuse</label>
+<label><input type="checkbox" value="Grief (parent, child, animal loss)"> Grief (parent, child, animal loss)</label>
+<label><input type="checkbox" value="Car accident"> Car accident</label>
+<label><input type="checkbox" value="Illness (cancer, chronic illness)"> Illness (cancer, chronic illness)</label>
+<label><input type="checkbox" value="Mental health themes"> Mental health themes</label>
+<label><input type="checkbox" value="Bullying"> Bullying</label>
+<label><input type="checkbox" value="Infidelity"> Infidelity</label>
+<label><input type="checkbox" value="Religious trauma"> Religious trauma</label>
+<label><input type="checkbox" value="Poverty"> Poverty</label>
+<label><input type="checkbox" value="Other"> Other</label>
 
-<textarea id="description" placeholder="Description" style="font-family: Arial, sans-serif;"></textarea>
-
-<button onclick="save()">Submit</button><br><br>
-
-<button onclick="location.href='index.html'">Home</button>
-
+  </div>
 </div>
 
 <script>
+<script>
+
+function toggleDropdown(){
+  document.getElementById("dropdownContent").style.display = "block";
+}
+
+document.addEventListener("click", function(event){
+
+let dropdown = document.getElementById("dropdownContent");
+let button = document.getElementById("dropdownButton");
+
+if (!button.contains(event.target) && !dropdown.contains(event.target)){
+dropdown.style.display = "none";
+}
+
+});
+
+function getSelectedCategories(){
+
+let checkboxes = document.querySelectorAll("#dropdownContent input:checked");
+
+return Array.from(checkboxes).map(cb => cb.value);
+
+}
+
+function updateButtonText(){
+
+let selected = getSelectedCategories();
+
+let button = document.getElementById("dropdownButton");
+
+button.innerText = selected.length > 0
+? selected.join(", ")
+: "Select trigger categories";
+
+}
+
+document.querySelectorAll("#dropdownContent input")
+.forEach(cb => cb.addEventListener("change", updateButtonText));
+
+</script>
+  
 function save(){
 
-let categorySelect = document.getElementById("category");
-
-let selectedCategories = Array.from(categorySelect.selectedOptions)
-.map(option => option.value);
-
+let selectedCategories = getSelectedCategories();
+  
 let entry = {
 title: document.getElementById("title").value,
 year: document.getElementById("year").value,
