@@ -335,6 +335,14 @@ letter-spacing:0.5px;
 </style>
 </head>
 
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="splash-content">
+    <div class="splash-icon">🎬</div>
+    <div class="splash-title">Screen Triggers</div>
+  </div>
+</div>
+
 <body>
 
 <header>
@@ -752,16 +760,23 @@ How
 </div>
 
 <script>
-<script>
 window.onload = function(){
 
 showHome();
 
-/* hide splash after 1.2 seconds */
+/* show splash then hide */
 setTimeout(()=>{
-document.getElementById("splash").classList.add("hide");
+  const splash = document.getElementById("splash");
+  if(splash){
+    splash.classList.add("hide");
+
+    setTimeout(()=>{
+      splash.style.display="none";
+    },600);
+  }
 },1200);
 
 };
 </script>
+</body>
 </html>
