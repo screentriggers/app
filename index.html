@@ -252,6 +252,28 @@ transform:scale(.97);
 box-shadow:0 1px 4px rgba(0,0,0,0.2);
 }
 
+.support-bar{
+position:fixed;
+bottom:80px;
+left:16px;
+right:16px;
+z-index:999;
+
+opacity:0;
+transform:translateY(20px);
+pointer-events:none;
+
+transition:
+opacity 0.35s ease,
+transform 0.35s ease;
+}
+
+.support-bar.show{
+opacity:1;
+transform:translateY(0);
+pointer-events:auto;
+}
+
 </style>
 </head>
 
@@ -430,8 +452,8 @@ function showHome(){
 hideAll();
 document.getElementById("home").style.display="block";
 
-/* ADD THIS LINE */
-document.getElementById("supportBar").style.display="block";
+/* CHANGE THIS */
+document.getElementById("supportBar").classList.add("show");
 
 setActive("nav-home");
 }
@@ -469,8 +491,8 @@ document.getElementById("submit").style.display="none";
 document.getElementById("about").style.display="none";
 document.getElementById("how").style.display="none";
 
-/* ADD THIS LINE */
-document.getElementById("supportBar").style.display="none";
+/* CHANGE THIS */
+document.getElementById("supportBar").classList.remove("show");
 }
      
 function render(list){
