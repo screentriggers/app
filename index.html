@@ -802,9 +802,15 @@ function installApp(){
      
 <script>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register("/app/sw.js", {
-  scope: "/app/"
-});
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/app/sw.js')
+      .then(reg => {
+        console.log("Service worker registered:", reg.scope);
+      })
+      .catch(err => {
+        console.log("Service worker failed:", err);
+      });
+  });
 }
 </script>
      
