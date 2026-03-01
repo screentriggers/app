@@ -778,6 +778,26 @@ setTimeout(()=>{
 },1200);
 
 };
+
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // Show install button if you want
+  console.log("App can be installed");
+});
+
+function installApp(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+    });
+  }
+}
 </script>
      
 <script>
