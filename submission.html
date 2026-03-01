@@ -5,99 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-
 body {
-  font-family: Arial;
-  background:#f4f6f8;
-  padding:20px;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 20px;
 }
 
 .container {
-  max-width:500px;
-  margin:auto;
-  background:white;
-  padding:20px;
-  border-radius:10px;
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-/* Inputs */
-input, textarea, select {
-  width:100%;
-  padding:10px;
-  margin-top:5px;
-  margin-bottom:15px;
-  border-radius:8px;
-  border:1px solid #ddd;
-  font-family: Arial;
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
 }
 
-/* Buttons */
+select[multiple] {
+  height: 180px;
+}
+
 button {
-  width:100%;
-  padding:12px;
-  background:#4a90e2;
-  color:white;
-  border:none;
-  border-radius:999px;
-  font-weight:600;
-  cursor:pointer;
+  width: 100%;
+  padding: 12px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-button:active {
-  transform:scale(.98);
+button:hover {
+  background: #357ABD;
 }
 
-/* Heading */
+.secondary {
+  background: #777;
+}
+
+.secondary:hover {
+  background: #555;
+}
+
 h2 {
-  font-size:28px;
-  font-weight:700;
-  margin-top:0;
-  margin-bottom:16px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 16px;
 }
 
-/* ---------- DROPDOWN ---------- */
-
-.dropdown {
-  position:relative;
-  margin-bottom:15px;
+.note {
+  font-size: 13px;
+  color: #666;
+  margin-top: -10px;
+  margin-bottom: 15px;
 }
-
-.dropdown-button {
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #ddd;
-  background:white;
-  text-align:left;
-  cursor:pointer;
-}
-
-.dropdown-content {
-  display:none;
-  position:absolute;
-  width:100%;
-  background:white;
-  border:1px solid #ddd;
-  border-radius:10px;
-  max-height:220px;
-  overflow-y:auto;
-  z-index:1000;
-  padding:10px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
-}
-
-.dropdown-content label {
-  display:block;
-  padding:6px;
-  cursor:pointer;
-}
-
-.dropdown-content input {
-  margin-right:8px;
-}
-
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -108,191 +80,83 @@ h2 {
 
 <input id="year" placeholder="Year">
 
-<!-- MULTI SELECT DROPDOWN -->
-<div class="dropdown">
+<label>Trigger Category</label>
+<select id="category" multiple>
+  <option value="Gun violence">Gun violence</option>
+  <option value="Sexual assault">Sexual assault</option>
+  <option value="Suicide / self-harm">Suicide / self-harm</option>
+  <option value="Child abuse">Child abuse</option>
+  <option value="Domestic violence">Domestic violence</option>
+  <option value="Animal harm">Animal harm</option>
+  <option value="Substance abuse">Substance abuse</option>
+  <option value="Eating disorders">Eating disorders</option>
+  <option value="Medical trauma">Medical trauma</option>
+  <option value="Death / dying">Death / dying</option>
+  <option value="Pregnancy / miscarriage">Pregnancy / miscarriage</option>
+  <option value="Kidnapping">Kidnapping</option>
+  <option value="Psychological abuse">Psychological abuse</option>
+  <option value="Grief (parent, child, animal loss)">Grief (parent, child, animal loss)</option>
+  <option value="Car accident">Car accident</option>
+  <option value="Illness (cancer, chronic illness)">Illness (cancer, chronic illness)</option>
+  <option value="Mental health themes">Mental health themes</option>
+  <option value="Bullying">Bullying</option>
+  <option value="Infidelity">Infidelity</option>
+  <option value="Religious trauma">Religious trauma</option>
+  <option value="Poverty">Poverty</option>
+  <option value="Other">Other</option>
+</select>
 
-<button type="button"
-class="dropdown-button"
-id="dropdownButton">
-Select trigger categories
-</button>
-
-<div class="dropdown-content"
-id="dropdownContent">
-
-<label><input type="checkbox" value="Gun violence">Gun violence</label>
-<label><input type="checkbox" value="Sexual assault">Sexual assault</label>
-<label><input type="checkbox" value="Suicide / self-harm">Suicide / self-harm</label>
-<label><input type="checkbox" value="Child abuse">Child abuse</label>
-<label><input type="checkbox" value="Domestic violence">Domestic violence</label>
-<label><input type="checkbox" value="Animal harm">Animal harm</label>
-<label><input type="checkbox" value="Substance abuse">Substance abuse</label>
-<label><input type="checkbox" value="Eating disorders">Eating disorders</label>
-<label><input type="checkbox" value="Medical trauma">Medical trauma</label>
-<label><input type="checkbox" value="Death / dying">Death / dying</label>
-<label><input type="checkbox" value="Pregnancy / miscarriage">Pregnancy / miscarriage</label>
-<label><input type="checkbox" value="Kidnapping">Kidnapping</label>
-<label><input type="checkbox" value="Psychological abuse">Psychological abuse</label>
-<label><input type="checkbox" value="Grief (parent, child, animal loss)">Grief (parent, child, animal loss)</label>
-<label><input type="checkbox" value="Car accident">Car accident</label>
-<label><input type="checkbox" value="Illness (cancer, chronic illness)">Illness (cancer, chronic illness)</label>
-<label><input type="checkbox" value="Mental health themes">Mental health themes</label>
-<label><input type="checkbox" value="Bullying">Bullying</label>
-<label><input type="checkbox" value="Infidelity">Infidelity</label>
-<label><input type="checkbox" value="Religious trauma">Religious trauma</label>
-<label><input type="checkbox" value="Poverty">Poverty</label>
-<label><input type="checkbox" value="Other">Other</label>
-
-</div>
+<div class="note">
+Hold CTRL (Windows) or tap multiple items (mobile) to select more than one
 </div>
 
 <select id="severity">
-<option>Mild</option>
-<option>Moderate</option>
-<option>Severe</option>
+  <option value="Mild">Mild</option>
+  <option value="Moderate">Moderate</option>
+  <option value="Severe">Severe</option>
 </select>
 
 <input id="timestamp" placeholder="Timestamp (00:00:00)">
 
-<textarea id="description"
-placeholder="Description"></textarea>
+<textarea id="description" placeholder="Description"></textarea>
+
+<input id="poster" placeholder="Poster URL">
 
 <button onclick="save()">Submit</button>
+
 <br><br>
 
-<button onclick="location.href='index.html'">
-Home
-</button>
+<button class="secondary" onclick="location.href='index.html'">Home</button>
 
 </div>
 
+
 <script>
-
-/* ---------- DROPDOWN CONTROL ---------- */
-
-const button =
-document.getElementById("dropdownButton");
-
-const dropdown =
-document.getElementById("dropdownContent");
-
-button.onclick = function(e){
-
-  e.stopPropagation();
-
-  dropdown.style.display =
-  dropdown.style.display === "block"
-  ? "none"
-  : "block";
-
-};
-
-document.addEventListener("click", function(){
-
-  dropdown.style.display = "none";
-
-});
-
-dropdown.addEventListener("click", function(e){
-
-  e.stopPropagation();
-
-});
-
-
-/* GET SELECTED */
-
-function getSelectedCategories(){
-
-  return Array.from(
-    document.querySelectorAll(
-      "#dropdownContent input:checked"
-    )
-  ).map(cb => cb.value);
-
-}
-
-
-/* UPDATE BUTTON TEXT */
-
-function updateDropdownText(){
-
-  let selected =
-  getSelectedCategories();
-
-  if(selected.length === 0)
-    button.innerText =
-    "Select trigger categories";
-
-  else if(selected.length <= 2)
-    button.innerText =
-    selected.join(", ");
-
-  else
-    button.innerText =
-    selected.length + " categories selected";
-
-}
-
-
-/* LISTEN FOR CHANGES */
-
-document
-.querySelectorAll(
-  "#dropdownContent input"
-)
-.forEach(cb =>
-  cb.addEventListener(
-    "change",
-    updateDropdownText
-  )
-);
-
-
-/* SAVE */
-
 function save(){
 
-  let entry = {
+  const categorySelect = document.getElementById("category");
 
-    title:
-    document.getElementById("title").value,
+  const selectedCategories = Array.from(categorySelect.selectedOptions)
+    .map(option => option.value);
 
-    year:
-    document.getElementById("year").value,
-
-    category:
-    getSelectedCategories(),
-
-    severity:
-    document.getElementById("severity").value,
-
-    timestamp:
-    document.getElementById("timestamp").value,
-
-    description:
-    document.getElementById("description").value
-
+  const entry = {
+    title: document.getElementById("title").value,
+    year: document.getElementById("year").value,
+    category: selectedCategories,
+    severity: document.getElementById("severity").value,
+    timestamp: document.getElementById("timestamp").value,
+    description: document.getElementById("description").value,
+    poster: document.getElementById("poster").value
   };
 
-  let library =
-  JSON.parse(
-    localStorage.getItem("library")
-    || "[]"
-  );
+  const library = JSON.parse(localStorage.getItem("library") || "[]");
 
   library.push(entry);
 
-  localStorage.setItem(
-    "library",
-    JSON.stringify(library)
-  );
+  localStorage.setItem("library", JSON.stringify(library));
 
-  window.location.href =
-  "thankyou.html";
-
+  window.location.href = "thankyou.html";
 }
-
 </script>
 
 </body>
