@@ -90,4 +90,76 @@ h2 {
   <option value="Gun violence">Gun violence</option>
   <option value="Sexual assault">Sexual assault</option>
   <option value="Suicide / self-harm">Suicide / self-harm</option>
-  <option value="Child abuse">Child abuse</
+  <option value="Child abuse">Child abuse</option>
+  <option value="Domestic violence">Domestic violence</option>
+  <option value="Animal harm">Animal harm</option>
+  <option value="Substance abuse">Substance abuse</option>
+  <option value="Eating disorders">Eating disorders</option>
+  <option value="Medical trauma">Medical trauma</option>
+  <option value="Death / dying">Death / dying</option>
+  <option value="Pregnancy / miscarriage">Pregnancy / miscarriage</option>
+  <option value="Kidnapping">Kidnapping</option>
+  <option value="Psychological abuse">Psychological abuse</option>
+  <option value="Grief (parent, child, animal loss)">Grief (parent, child, animal loss)</option>
+  <option value="Car accident">Car accident</option>
+  <option value="Illness (cancer, chronic illness)">Illness (cancer, chronic illness)</option>
+  <option value="Mental health themes">Mental health themes</option>
+  <option value="Bullying">Bullying</option>
+  <option value="Infidelity">Infidelity</option>
+  <option value="Religious trauma">Religious trauma</option>
+  <option value="Poverty">Poverty</option>
+  <option value="Other">Other</option>
+</select>
+
+<div class="note">
+Hold CTRL (Windows) or tap multiple items (mobile) to select more than one
+</div>
+
+<select id="severity">
+  <option value="Mild">Mild</option>
+  <option value="Moderate">Moderate</option>
+  <option value="Severe">Severe</option>
+</select>
+
+<input id="timestamp" placeholder="Timestamp (00:00:00)">
+
+<textarea id="description" placeholder="Description"></textarea>
+
+<button onclick="save()">Submit</button>
+
+<br><br>
+
+<button class="secondary" onclick="location.href='index.html'">Home</button>
+
+</div>
+
+
+<script>
+function save(){
+
+  const categorySelect = document.getElementById("category");
+
+  const selectedCategories = Array.from(categorySelect.selectedOptions)
+    .map(option => option.value);
+
+  const entry = {
+    title: document.getElementById("title").value,
+    year: document.getElementById("year").value,
+    category: selectedCategories,
+    severity: document.getElementById("severity").value,
+    timestamp: document.getElementById("timestamp").value,
+    description: document.getElementById("description").value
+  };
+
+  const library = JSON.parse(localStorage.getItem("library") || "[]");
+
+  library.push(entry);
+
+  localStorage.setItem("library", JSON.stringify(library));
+
+  window.location.href = "thankyou.html";
+}
+</script>
+
+</body>
+</html>
