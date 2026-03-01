@@ -252,6 +252,55 @@ transform:scale(.97);
 box-shadow:0 1px 4px rgba(0,0,0,0.2);
 }
 
+.support-button{
+display:block;
+text-align:center;
+padding:16px;
+border-radius:14px;
+text-decoration:none;
+font-weight:600;
+font-size:16px;
+
+background:linear-gradient(135deg,#ff5f5f,#ff8a5f);
+color:white;
+
+box-shadow:
+0 6px 18px rgba(255,95,95,0.35),
+0 0 0 rgba(255,95,95,0.4);
+
+animation:
+supportGlow 2.5s ease-in-out infinite,
+supportBounce 3.5s ease-in-out infinite;
+}
+
+
+/* GLOW PULSE */
+@keyframes supportGlow{
+0%,100%{
+box-shadow:
+0 6px 18px rgba(255,95,95,0.35),
+0 0 0 rgba(255,95,95,0.4);
+}
+
+50%{
+box-shadow:
+0 8px 24px rgba(255,95,95,0.55),
+0 0 14px rgba(255,95,95,0.45);
+}
+}
+
+
+/* SUBTLE BOUNCE */
+@keyframes supportBounce{
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-4px);
+}
+}
+
 .support-bar{
 position:fixed;
 bottom:80px;
@@ -451,10 +500,7 @@ let selectedCategories = [];
 function showHome(){
 hideAll();
 document.getElementById("home").style.display="block";
-
-/* CHANGE THIS */
-document.getElementById("supportBar").classList.add("show");
-
+document.getElementById("supportBar").style.display="block";
 setActive("nav-home");
 }
      
@@ -490,9 +536,7 @@ document.getElementById("library").style.display="none";
 document.getElementById("submit").style.display="none";
 document.getElementById("about").style.display="none";
 document.getElementById("how").style.display="none";
-
-/* CHANGE THIS */
-document.getElementById("supportBar").classList.remove("show");
+document.getElementById("supportBar").style.display="none";
 }
      
 function render(list){
