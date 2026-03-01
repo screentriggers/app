@@ -49,7 +49,7 @@ h2 {
 
 <input id="year" placeholder="Year">
 
-<select id="category" required>
+<select id="category" multiple required size="8">
   <option value="">Select trigger category</option>
   <option>Gun violence</option>
   <option>Sexual assault</option>
@@ -93,20 +93,29 @@ h2 {
 
 <script>
 function save(){
+
+let categorySelect = document.getElementById("category");
+
+let selectedCategories = Array.from(categorySelect.selectedOptions)
+.map(option => option.value);
+
 let entry = {
 title: document.getElementById("title").value,
 year: document.getElementById("year").value,
-category: document.getElementById("category").value,
+category: selectedCategories,
 severity: document.getElementById("severity").value,
 timestamp: document.getElementById("timestamp").value,
-description: document.getElementById("description").value,
+description: document.getElementById("description").value
 };
 
 let library = JSON.parse(localStorage.getItem("library")||"[]");
+
 library.push(entry);
+
 localStorage.setItem("library", JSON.stringify(library));
 
 window.location.href = "thankyou.html";
+
 }
 </script>
 
