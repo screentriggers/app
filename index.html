@@ -801,7 +801,11 @@ function installApp(){
 </script>
      
 <script>
-navigator.serviceWorker.register("sw.js");
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register("sw.js", {
+    scope: "/app/"
+  });
+}
 </script>
      
 </body>
