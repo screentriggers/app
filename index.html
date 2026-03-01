@@ -429,9 +429,13 @@ let selectedCategories = [];
 function showHome(){
 hideAll();
 document.getElementById("home").style.display="block";
+
+/* ADD THIS LINE */
+document.getElementById("supportBar").style.display="block";
+
 setActive("nav-home");
 }
-
+     
 function showLibrary(){
 hideAll();
 document.getElementById("library").style.display="block";
@@ -464,8 +468,11 @@ document.getElementById("library").style.display="none";
 document.getElementById("submit").style.display="none";
 document.getElementById("about").style.display="none";
 document.getElementById("how").style.display="none";
-}
 
+/* ADD THIS LINE */
+document.getElementById("supportBar").style.display="none";
+}
+     
 function render(list){
 
 let html="";
