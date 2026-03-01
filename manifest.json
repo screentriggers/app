@@ -1,7 +1,7 @@
 {
   "name": "Screen Triggers",
   "short_name": "Screen Triggers",
-  "start_url": "/app/index.html",
+  "start_url": "/app/",
   "scope": "/app/",
   "display": "standalone",
   "background_color": "#0b3d91",
