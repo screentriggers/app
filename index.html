@@ -359,7 +359,7 @@ Watch with confidence.
 </div>
 </div>
 
-<button onclick="installApp()" class="button">
+<button onclick="installApp()" id="installButton" class="button" style="display:none;">
 Install App
 </button>
 
@@ -783,25 +783,56 @@ setTimeout(()=>{
 
 };
 
-let deferredPrompt;
+let deferredPrompt = null;
+const installButton = document.getElementById("installButton");
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
+/* Detect install availability */
+window.addEventListener("beforeinstallprompt", (event) => {
 
-  // Show install button if you want
-  console.log("App can be installed");
+  console.log("Install available");
+
+  event.preventDefault();
+
+  deferredPrompt = event;
+
+  /* Show install button */
+  installButton.style.display = "block";
 });
 
-function installApp(){
-  if(deferredPrompt){
-    deferredPrompt.prompt();
 
-    deferredPrompt.userChoice.then(() => {
-      deferredPrompt = null;
-    });
+/* Install button click */
+async function installApp(){
+
+  if (!deferredPrompt) return;
+
+  deferredPrompt.prompt();
+
+  const choiceResult = await deferredPrompt.userChoice;
+
+  if (choiceResult.outcome === "accepted") {
+
+    console.log("User accepted install");
+
+  } else {
+
+    console.log("User dismissed install");
+
   }
+
+  deferredPrompt = null;
+
+  installButton.style.display = "none";
 }
+
+
+/* Detect successful install */
+window.addEventListener("appinstalled", () => {
+
+  console.log("App installed successfully");
+
+  installButton.style.display = "none";
+
+});
 </script>
      
 <script>
