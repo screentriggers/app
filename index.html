@@ -406,7 +406,7 @@ document.getElementById(tab).classList.add("active");
 
 }
 
-const data = [
+const defaultData = [
 
 {
 title:"The Lion King",
@@ -427,6 +427,22 @@ desc:"Mass casualty sinking"
 }
 
 ];
+
+// Load user submissions
+const savedData = JSON.parse(localStorage.getItem("library") || "[]");
+
+// Convert savedData format to match library format
+const formattedSavedData = savedData.map(item => ({
+title: item.title,
+year: item.year,
+category: item.category,
+severity: item.severity,
+time: item.timestamp,
+desc: item.description
+}));
+
+// Combine both
+const data = [...defaultData, ...formattedSavedData];
 
 const categories = [
 "Gun violence",
