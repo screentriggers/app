@@ -5,26 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+
 body {
   font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  padding: 20px;
+  background:#f4f6f8;
+  padding:20px;
 }
 
 .container {
-  max-width: 500px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+  max-width:500px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:10px;
 }
 
-input, select, textarea {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
+input, textarea, select {
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  margin-bottom:15px;
+  box-sizing:border-box;
   font-family: Arial, sans-serif;
 }
 
@@ -32,46 +33,91 @@ textarea {
   font-family: Arial, sans-serif;
 }
 
-select[multiple] {
-  height: 180px;
-}
-
 button {
-  width: 100%;
-  padding: 12px;
-  background: #4a90e2;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
+  width:100%;
+  padding:12px;
+  background:#4a90e2;
+  color:white;
+  border:none;
+  border-radius:6px;
+  font-size:16px;
+  cursor:pointer;
 }
 
 button:hover {
-  background: #357ABD;
+  background:#357ABD;
 }
 
 .secondary {
-  background: #777;
+  background:#777;
 }
 
 .secondary:hover {
-  background: #555;
+  background:#555;
 }
 
 h2 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-top: 0;
-  margin-bottom: 16px;
+  font-size:28px;
+  font-weight:700;
+  margin-top:0;
+  margin-bottom:16px;
 }
 
-.note {
-  font-size: 13px;
-  color: #666;
-  margin-top: -10px;
-  margin-bottom: 15px;
+/* Dropdown */
+.dropdown {
+  position:relative;
+  margin-bottom:15px;
 }
+
+.dropdown-button {
+  width:100%;
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  background:white;
+  text-align:left;
+  cursor:pointer;
+}
+
+.dropdown-panel {
+  display:none;
+  position:absolute;
+  width:100%;
+  max-height:250px;
+  overflow-y:auto;
+  background:white;
+  border:1px solid #ccc;
+  border-radius:6px;
+  z-index:1000;
+  padding:10px;
+}
+
+.dropdown-panel label {
+  display:block;
+  padding:5px;
+  cursor:pointer;
+}
+
+.dropdown-panel label:hover {
+  background:#f0f0f0;
+}
+
+.clear-btn {
+  background:#eee;
+  color:#333;
+  border:none;
+  padding:8px;
+  margin-bottom:8px;
+  width:100%;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.clear-btn:hover {
+  background:#ddd;
+}
+
 </style>
 </head>
 
@@ -85,34 +131,45 @@ h2 {
 
 <input id="year" placeholder="Year">
 
-<label>Trigger Category</label>
-<select id="category" multiple>
-  <option value="Gun violence">Gun violence</option>
-  <option value="Sexual assault">Sexual assault</option>
-  <option value="Suicide / self-harm">Suicide / self-harm</option>
-  <option value="Child abuse">Child abuse</option>
-  <option value="Domestic violence">Domestic violence</option>
-  <option value="Animal harm">Animal harm</option>
-  <option value="Substance abuse">Substance abuse</option>
-  <option value="Eating disorders">Eating disorders</option>
-  <option value="Medical trauma">Medical trauma</option>
-  <option value="Death / dying">Death / dying</option>
-  <option value="Pregnancy / miscarriage">Pregnancy / miscarriage</option>
-  <option value="Kidnapping">Kidnapping</option>
-  <option value="Psychological abuse">Psychological abuse</option>
-  <option value="Grief (parent, child, animal loss)">Grief (parent, child, animal loss)</option>
-  <option value="Car accident">Car accident</option>
-  <option value="Illness (cancer, chronic illness)">Illness (cancer, chronic illness)</option>
-  <option value="Mental health themes">Mental health themes</option>
-  <option value="Bullying">Bullying</option>
-  <option value="Infidelity">Infidelity</option>
-  <option value="Religious trauma">Religious trauma</option>
-  <option value="Poverty">Poverty</option>
-  <option value="Other">Other</option>
-</select>
+<label>Trigger Categories</label>
 
-<div class="note">
-Hold CTRL (Windows) or tap multiple items (mobile) to select more than one
+<div class="dropdown">
+
+  <div class="dropdown-button" onclick="toggleDropdown()" id="selectedText">
+    Select trigger categories
+  </div>
+
+  <div class="dropdown-panel" id="dropdownPanel">
+
+    <button type="button" class="clear-btn" onclick="clearCategories()">
+      Clear selection
+    </button>
+
+    <label><input type="checkbox" value="Gun violence"> Gun violence</label>
+    <label><input type="checkbox" value="Sexual assault"> Sexual assault</label>
+    <label><input type="checkbox" value="Suicide / self-harm"> Suicide / self-harm</label>
+    <label><input type="checkbox" value="Child abuse"> Child abuse</label>
+    <label><input type="checkbox" value="Domestic violence"> Domestic violence</label>
+    <label><input type="checkbox" value="Animal harm"> Animal harm</label>
+    <label><input type="checkbox" value="Substance abuse"> Substance abuse</label>
+    <label><input type="checkbox" value="Eating disorders"> Eating disorders</label>
+    <label><input type="checkbox" value="Medical trauma"> Medical trauma</label>
+    <label><input type="checkbox" value="Death / dying"> Death / dying</label>
+    <label><input type="checkbox" value="Pregnancy / miscarriage"> Pregnancy / miscarriage</label>
+    <label><input type="checkbox" value="Kidnapping"> Kidnapping</label>
+    <label><input type="checkbox" value="Psychological abuse"> Psychological abuse</label>
+    <label><input type="checkbox" value="Grief (parent, child, animal loss)"> Grief (parent, child, animal loss)</label>
+    <label><input type="checkbox" value="Car accident"> Car accident</label>
+    <label><input type="checkbox" value="Illness (cancer, chronic illness)"> Illness (cancer, chronic illness)</label>
+    <label><input type="checkbox" value="Mental health themes"> Mental health themes</label>
+    <label><input type="checkbox" value="Bullying"> Bullying</label>
+    <label><input type="checkbox" value="Infidelity"> Infidelity</label>
+    <label><input type="checkbox" value="Religious trauma"> Religious trauma</label>
+    <label><input type="checkbox" value="Poverty"> Poverty</label>
+    <label><input type="checkbox" value="Other"> Other</label>
+
+  </div>
+
 </div>
 
 <select id="severity">
@@ -133,32 +190,84 @@ Hold CTRL (Windows) or tap multiple items (mobile) to select more than one
 
 </div>
 
-
 <script>
+
+/* Dropdown toggle */
+function toggleDropdown(){
+  document.getElementById("dropdownPanel").style.display =
+    document.getElementById("dropdownPanel").style.display === "block"
+    ? "none"
+    : "block";
+}
+
+/* Close when clicking outside */
+document.addEventListener("click", function(event){
+  if (!event.target.closest(".dropdown")){
+    document.getElementById("dropdownPanel").style.display = "none";
+  }
+});
+
+/* Checkbox handling */
+const checkboxes =
+document.querySelectorAll("#dropdownPanel input[type=checkbox]");
+
+checkboxes.forEach(box => box.addEventListener("change", updateText));
+
+function updateText(){
+
+  const count =
+  Array.from(checkboxes).filter(box => box.checked).length;
+
+  const text =
+    count === 0
+    ? "Select trigger categories"
+    : count === 1
+    ? "1 category selected"
+    : count + " categories selected";
+
+  document.getElementById("selectedText").innerText = text;
+
+}
+
+/* Clear selection */
+function clearCategories(){
+
+  checkboxes.forEach(box => box.checked = false);
+
+  updateText();
+
+}
+
+/* Save */
 function save(){
 
-  const categorySelect = document.getElementById("category");
-
-  const selectedCategories = Array.from(categorySelect.selectedOptions)
-    .map(option => option.value);
+  const selectedCategories =
+  Array.from(checkboxes)
+  .filter(box => box.checked)
+  .map(box => box.value);
 
   const entry = {
+
     title: document.getElementById("title").value,
     year: document.getElementById("year").value,
     category: selectedCategories,
     severity: document.getElementById("severity").value,
     timestamp: document.getElementById("timestamp").value,
     description: document.getElementById("description").value
+
   };
 
-  const library = JSON.parse(localStorage.getItem("library") || "[]");
+  const library =
+  JSON.parse(localStorage.getItem("library") || "[]");
 
   library.push(entry);
 
   localStorage.setItem("library", JSON.stringify(library));
 
   window.location.href = "thankyou.html";
+
 }
+
 </script>
 
 </body>
