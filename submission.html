@@ -37,21 +37,26 @@ select[multiple] {
 }
 
 button {
-button {
   width: 100%;
-  padding: 12px;
-  background: #0b3d91;   /* navy blue */
+  padding: 14px;
+  background: #0b3d91;   /* navy */
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 999px;  /* pill shape */
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  display: block;
 }
 
 button:hover {
-  background: #082c66;   /* darker navy on hover */
+  background: #082c66;   /* darker navy */
 }
 
+button + button {
+  margin-top: 10px;
+}
+  
 .secondary {
   background: #777;
 }
