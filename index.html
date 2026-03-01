@@ -335,6 +335,8 @@ letter-spacing:0.5px;
 </style>
 </head>
 
+<body>
+
 <!-- SPLASH SCREEN -->
 <div id="splash">
   <div class="splash-content">
@@ -342,8 +344,6 @@ letter-spacing:0.5px;
     <div class="splash-title">Screen Triggers</div>
   </div>
 </div>
-
-<body>
 
 <header>
 🎬 Screen Triggers
@@ -778,5 +778,12 @@ setTimeout(()=>{
 
 };
 </script>
+     
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js");
+}
+</script>
+     
 </body>
 </html>
