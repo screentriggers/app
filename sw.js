@@ -1,4 +1,4 @@
-const CACHE_NAME = "screen-triggers-v1";
+const CACHE_NAME = "screen-triggers-v2";
 
 const urlsToCache = [
   "/app/",
