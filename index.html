@@ -525,7 +525,7 @@ html+=`
 <div><b>🎥 ${item.title} (${item.year})</b></div>
 
 <div class="small">
-Trigger Category: ${item.category}
+Trigger Category: ${Array.isArray(item.category) ? item.category.join(", ") : item.category}
 </div>
 
 <div class="small">
