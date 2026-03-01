@@ -37,19 +37,34 @@ select[multiple] {
 }
 
 button{
-display:block;
-background:#0b3d91;
-color:white;
-text-align:center;
-padding:14px;
-border-radius:10px;
-text-decoration:none;
-margin-bottom:10px;
-font-weight:500;
+  display:block;
+  width:100%;
+  background:#1e4a92;            /* exact navy shade from Library */
+  color:white;
+  text-align:center;
+  padding:16px;
+  border:none;
+  border-radius:16px;            /* matches Library button shape */
+  font-size:18px;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:10px;
+
+  /* depth like Library button */
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
+
+  /* smooth animation */
+  transition:background 0.2s ease, transform 0.05s ease, box-shadow 0.05s ease;
 }
 
 button:hover{
-background:#082c66;
+  background:#163a73;
+  box-shadow:0 4px 10px rgba(0,0,0,0.18);
+}
+
+button:active{
+  transform:translateY(1px);
+  box-shadow:0 1px 3px rgba(0,0,0,0.15);
 }
   
 .secondary {
@@ -134,12 +149,11 @@ Hold CTRL (Windows) or tap multiple items (mobile) to select more than one
 
 <button onclick="save()">Submit</button>
 
-<br><br>
-
+<br>
+  
 <button onclick="location.href='index.html'">Home</button>
 </div>
-
-  
+ 
 <script>
   
 function save(){
