@@ -85,8 +85,6 @@ h2 {
 
 <textarea id="description" placeholder="Description" style="font-family: Arial, sans-serif;"></textarea>
 
-<input id="poster" placeholder="Poster URL">
-
 <button onclick="save()">Submit</button><br><br>
 
 <button onclick="location.href='index.html'">Home</button>
@@ -102,7 +100,6 @@ category: document.getElementById("category").value,
 severity: document.getElementById("severity").value,
 timestamp: document.getElementById("timestamp").value,
 description: document.getElementById("description").value,
-poster: document.getElementById("poster").value
 };
 
 let library = JSON.parse(localStorage.getItem("library")||"[]");
