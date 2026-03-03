@@ -726,23 +726,19 @@ document.getElementById("filterButton").innerText = text;
 function formatTimestamp(ts) {
   if (!ts) return "";
 
-  // If already in HH:MM:SS format, return as-is
+  // If already formatted like HH:MM:SS
   if (typeof ts === "string" && ts.includes(":") && !ts.includes("T")) {
     return ts;
   }
 
-  const date = new Date(ts);
-  if (isNaN(date)) return "";
-
-  const hours = date.getUTCHours();
-  const minutes = date.getUTCMinutes().toString().padStart(2, "0");
-  const seconds = date.getUTCSeconds().toString().padStart(2, "0");
-
-  if (hours > 0) {
-    return `${hours}:${minutes}:${seconds}`;
+  // If it's an ISO string from Google Sheets
+  if (typeof ts === "string" && ts.includes("T")) {
+    // Extract only the time portion before the Z
+    const timePart = ts.split("T")[1].replace("Z", "");
+    return timePart;
   }
 
-  return `${minutes}:${seconds}`;
+  return ts;
 }
      
 function loadFromSheets(){
