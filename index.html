@@ -726,24 +726,25 @@ document.getElementById("filterButton").innerText = text;
 function formatTimestamp(ts) {
   if (!ts) return "";
 
-  // If already clean HH:MM:SS
-  if (typeof ts === "string" && ts.match(/^\d{2}:\d{2}:\d{2}$/)) {
-    return ts;
+  // If it's NOT an ISO date (no T), return exactly as entered
+  // This allows: "S1E1 - 00:10:00" or "Opening scene"
+  if (typeof ts === "string" && !ts.includes("T")) {
+    return ts.trim();
   }
 
-  // If it's ISO from Sheets (1899 date)
+  // If it's an ISO string from Google Sheets (1899-12-30Txx:xx:xx.000Z)
   if (typeof ts === "string" && ts.includes("T")) {
 
-    const date = new Date(ts);
+    // Extract only the time portion
+    let timePart = ts.split("T")[1];
 
-    // Subtract timezone offset to get original sheet time
-    const corrected = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+    // Remove trailing Z
+    timePart = timePart.replace("Z", "");
 
-    const hours = String(corrected.getUTCHours()).padStart(2, "0");
-    const minutes = String(corrected.getUTCMinutes()).padStart(2, "0");
-    const seconds = String(corrected.getUTCSeconds()).padStart(2, "0");
+    // Remove milliseconds
+    timePart = timePart.split(".")[0];
 
-    return `${hours}:${minutes}:${seconds}`;
+    return timePart;
   }
 
   return ts;
