@@ -745,6 +745,8 @@ sheetData.sort((a,b) => b.submitted - a.submitted);
 // Merge fresh every time
 data = [...defaultData, ...sheetData];
 
+console.log("Merged data:", data);
+     
 render(data);
 
 })
