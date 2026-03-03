@@ -726,9 +726,13 @@ document.getElementById("filterButton").innerText = text;
 function formatTimestamp(ts) {
   if (!ts) return "";
 
-  const date = new Date(ts);
+  // If already in HH:MM:SS format, return as-is
+  if (typeof ts === "string" && ts.includes(":") && !ts.includes("T")) {
+    return ts;
+  }
 
-  if (isNaN(date)) return ts;
+  const date = new Date(ts);
+  if (isNaN(date)) return "";
 
   const hours = date.getUTCHours();
   const minutes = date.getUTCMinutes().toString().padStart(2, "0");
