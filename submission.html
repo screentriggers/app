@@ -234,7 +234,7 @@ let entry = {
 
 fetch("https://script.google.com/macros/s/AKfycbxMMClPsPqgHGJ_dfvDYpz1e0FQq9myhGUHxEbjYpa7CDIhm39as_USVMyTpx9BgwGE/exec", {
   method: "POST",
-  body: JSON.stringify(entry)
+  body: new URLSearchParams(entry)
 })
 .then(res => res.json())
 .then(res => {
@@ -252,7 +252,7 @@ fetch("https://script.google.com/macros/s/AKfycbxMMClPsPqgHGJ_dfvDYpz1e0FQq9myhG
   console.error("Fetch error:", err);
   alert("Submission failed.");
 });
-
+  
 }
 </script>
 
