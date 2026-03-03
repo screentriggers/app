@@ -722,6 +722,23 @@ document.getElementById("filterButton").innerText = text;
 
 }
 
+function formatTimestamp(ts) {
+  if (!ts) return "";
+
+  const date = new Date(ts);
+  if (isNaN(date)) return ts;
+
+  const minutes = date.getUTCMinutes().toString().padStart(2, "0");
+  const seconds = date.getUTCSeconds().toString().padStart(2, "0");
+  const hours = date.getUTCHours();
+
+  if (hours > 0) {
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
+  return `${minutes}:${seconds}`;
+}
+     
 function loadFromSheets(){
 
 fetch("https://script.google.com/macros/s/AKfycbw_5_SepS63HeiqTk2Zc090uv0vpqsvRSHH5G3kPAyxyvZxNhGd-UJdvxOc09dYMxs/exec")
