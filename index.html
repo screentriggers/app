@@ -837,9 +837,8 @@ window.addEventListener("appinstalled", () => {
      
 <script>
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/app/sw.js", {
-    scope: "/app/"
-  }).then(() => console.log("Service Worker registered"));
+  navigator.serviceWorker.register("sw.js")
+    .then(() => console.log("Service Worker registered"));
 }
 </script>
 </body>
