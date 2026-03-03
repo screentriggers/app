@@ -726,16 +726,24 @@ document.getElementById("filterButton").innerText = text;
 function formatTimestamp(ts) {
   if (!ts) return "";
 
-  // If already formatted like HH:MM:SS
-  if (typeof ts === "string" && ts.includes(":") && !ts.includes("T")) {
+  // If already clean HH:MM:SS
+  if (typeof ts === "string" && ts.match(/^\d{2}:\d{2}:\d{2}$/)) {
     return ts;
   }
 
-  // If it's an ISO string from Google Sheets
+  // If it's ISO from Sheets (1899 date)
   if (typeof ts === "string" && ts.includes("T")) {
-    // Extract only the time portion before the Z
-    const timePart = ts.split("T")[1].replace("Z", "");
-    return timePart;
+
+    const date = new Date(ts);
+
+    // Subtract timezone offset to get original sheet time
+    const corrected = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+
+    const hours = String(corrected.getUTCHours()).padStart(2, "0");
+    const minutes = String(corrected.getUTCMinutes()).padStart(2, "0");
+    const seconds = String(corrected.getUTCSeconds()).padStart(2, "0");
+
+    return `${hours}:${minutes}:${seconds}`;
   }
 
   return ts;
