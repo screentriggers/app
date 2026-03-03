@@ -744,14 +744,18 @@ submitted:new Date(item.submitted)
 // Sort newest first
 formatted.sort((a,b) => b.submitted - a.submitted);
 
-// Replace current data
-data.length = 0;
-data.push(...formatted);
+// Replace entire data array
+data = formatted;
 
+// Re-render
 render(data);
 
-});
+})
 
+.catch(err => {
+console.error("Load error:", err);
+});
+     
 }
 updateFilterButton();
      
