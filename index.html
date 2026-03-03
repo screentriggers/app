@@ -749,13 +749,13 @@ fetch("https://script.google.com/macros/s/AKfycbw_5_SepS63HeiqTk2Zc090uv0vpqsvRS
 .then(rows => {
 
 sheetData = rows.map(item => ({
-  title:item.title,
-  year:item.year,
-  category:item.category,
-  severity:item.severity,
-  timestamp: ${formatTimestamp(item.timestamp)}
-  desc:item.description,
-  submitted:new Date(item.submitted)
+  title: item.title,
+  year: item.year,
+  category: item.category,
+  severity: item.severity,
+  timestamp: item.timestamp,
+  desc: item.description,
+  submitted: new Date(item.submitted)
 }));
 
 sheetData.sort((a,b) => b.submitted - a.submitted);
