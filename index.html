@@ -828,18 +828,30 @@ How
 </div>
 
 <script>
-window.onload = function(){
+window.addEventListener("load", function(){
 
-showHome();
-loadFromSheets();
+  showHome();
+  loadFromSheets();
 
-/* Immediately remove splash */
-const splash = document.getElementById("splash");
-if (splash) {
-  splash.style.display = "none";
-}
+  const splash = document.getElementById("splash");
 
-};
+  if (splash) {
+
+    // Wait 1.2 seconds so user sees it
+    setTimeout(() => {
+
+      splash.classList.add("hide");
+
+      // Fully remove after fade animation completes
+      setTimeout(() => {
+        splash.style.display = "none";
+      }, 600);
+
+    }, 1200);
+
+  }
+
+});
 
 let deferredPrompt = null;
 const installButton = document.getElementById("installButton");
