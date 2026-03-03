@@ -234,6 +234,9 @@ let entry = {
 
 fetch("https://script.google.com/macros/s/AKfycbxMMClPsPqgHGJ_dfvDYpz1e0FQq9myhGUHxEbjYpa7CDIhm39as_USVMyTpx9BgwGE/exec", {
   method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
   body: JSON.stringify(entry)
 })
 .then(res => res.json())
@@ -244,10 +247,12 @@ fetch("https://script.google.com/macros/s/AKfycbxMMClPsPqgHGJ_dfvDYpz1e0FQq9myhG
     return;
   }
 
+  alert("Submission saved successfully!");
   window.location.href = "thankyou.html";
+
 })
-.catch(error => {
-  console.error(error);
+.catch(err => {
+  console.error("Fetch error:", err);
   alert("Submission failed.");
 });
 
