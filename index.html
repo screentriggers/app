@@ -726,11 +726,12 @@ function formatTimestamp(ts) {
   if (!ts) return "";
 
   const date = new Date(ts);
+
   if (isNaN(date)) return ts;
 
+  const hours = date.getUTCHours();
   const minutes = date.getUTCMinutes().toString().padStart(2, "0");
   const seconds = date.getUTCSeconds().toString().padStart(2, "0");
-  const hours = date.getUTCHours();
 
   if (hours > 0) {
     return `${hours}:${minutes}:${seconds}`;
@@ -752,7 +753,7 @@ sheetData = rows.map(item => ({
   year:item.year,
   category:item.category,
   severity:item.severity,
-  time:item.timestamp,
+  timestamp: ${formatTimestamp(item.timestamp)}
   desc:item.description,
   submitted:new Date(item.submitted)
 }));
