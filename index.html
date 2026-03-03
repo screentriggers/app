@@ -721,6 +721,34 @@ document.getElementById("filterButton").innerText = text;
 
 }
 
+function loadFromSheets(){
+
+fetch(https://script.google.com/macros/s/AKfycbzfT1kNg5n014WGMZ5q2_CQpm_XAdyRKJQ3211iWlu9eXhsv6Tjl7zU1UVOyVO7W0hP/exec)
+
+.then(res => res.json())
+
+.then(rows => {
+
+let formatted = rows.map(item => ({
+
+title:item.title,
+year:item.year,
+category:item.category,
+severity:item.severity,
+time:item.timestamp,
+desc:item.description
+
+}));
+
+// Replace current data instead of pushing duplicates
+data.length = 0;
+data.push(...formatted);
+
+render(data);
+
+});
+
+}
 updateFilterButton();
      
 </script>
