@@ -153,11 +153,78 @@ Hold CTRL (Windows) or tap multiple items (mobile) to select more than one
 </div>
  
 <script>
+
+function toTitleCase(str){
+
+function toTitleCase(str){
+
+const smallWords = [
+"and","or","the","a","an","of","in","on","at","to",
+"for","by","with","from","but","nor","as","per"
+];
+
+const romanNumerals = [
+"i","ii","iii","iv","v","vi","vii","viii","ix","x",
+"xi","xii","xiii","xiv","xv","xvi","xvii","xviii","xix","xx"
+];
+
+let words = str
+.toLowerCase()
+.trim()
+.split(/\s+/);
+
+return words.map((word, index) => {
+
+let isFirst = index === 0;
+let isLast = index === words.length - 1;
+
+// Handle hyphenated words (e.g., spider-man)
+if(word.includes("-")){
+return word.split("-").map((part, i) => {
+
+if(
+smallWords.includes(part) &&
+!(isFirst && i === 0) &&
+!(isLast && i === word.split("-").length - 1)
+){
+return part;
+}
+
+if(romanNumerals.includes(part)){
+return part.toUpperCase();
+}
+
+return part.charAt(0).toUpperCase() + part.slice(1);
+
+}).join("-");
+}
+
+// Roman numerals
+if(romanNumerals.includes(word)){
+return word.toUpperCase();
+}
+
+// Small words
+if(
+smallWords.includes(word) &&
+!isFirst &&
+!isLast
+){
+return word;
+}
+
+return word.charAt(0).toUpperCase() + word.slice(1);
+
+}).join(" ");
+
+}
   
 function save(){
 
 let entry = {
-title: document.getElementById("title").value,
+title: toTitleCase(
+document.getElementById("title").value.trim()
+),
 year: document.getElementById("year").value,
 category: document.getElementById("category").value,
 severity: document.getElementById("severity").value,
