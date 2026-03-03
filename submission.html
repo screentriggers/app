@@ -156,27 +156,30 @@ Hold CTRL (Windows) or tap multiple items (mobile) to select more than one
   
 function save(){
 
-  const categorySelect = document.getElementById("category");
+let entry = {
+title: document.getElementById("title").value,
+year: document.getElementById("year").value,
+category: document.getElementById("category").value,
+severity: document.getElementById("severity").value,
+timestamp: document.getElementById("timestamp").value,
+description: document.getElementById("description").value,
+poster: document.getElementById("poster").value
+};
 
-  const selectedCategories = Array.from(categorySelect.selectedOptions)
-    .map(option => option.value);
+fetch("https://script.google.com/macros/s/AKfycbzfT1kNg5n014WGMZ5q2_CQpm_XAdyRKJQ3211iWlu9eXhsv6Tjl7zU1UVOyVO7W0hP/exec, {
 
-  const entry = {
-    title: document.getElementById("title").value,
-    year: document.getElementById("year").value,
-    category: selectedCategories,
-    severity: document.getElementById("severity").value,
-    timestamp: document.getElementById("timestamp").value,
-    description: document.getElementById("description").value
-  };
+method:"POST",
 
-  const library = JSON.parse(localStorage.getItem("library") || "[]");
+body: JSON.stringify(entry)
 
-  library.push(entry);
+})
+.then(res => res.json())
+.then(res => {
 
-  localStorage.setItem("library", JSON.stringify(library));
+alert("Submission saved");
 
-  window.location.href = "thankyou.html";
+window.location.href = "thankyou.html";
+});
 }
 </script>
 
