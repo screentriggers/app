@@ -823,17 +823,11 @@ window.onload = function(){
 showHome();
 loadFromSheets();
 
-/* show splash then hide */
-setTimeout(()=>{
-  const splash = document.getElementById("splash");
-  if(splash){
-    splash.classList.add("hide");
-
-    setTimeout(()=>{
-      splash.style.display="none";
-    },600);
-  }
-},1200);
+/* Immediately remove splash */
+const splash = document.getElementById("splash");
+if (splash) {
+  splash.style.display = "none";
+}
 
 };
 
