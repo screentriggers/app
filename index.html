@@ -723,7 +723,7 @@ document.getElementById("filterButton").innerText = text;
 
 function loadFromSheets(){
 
-fetch(https://script.google.com/macros/s/AKfycbzfT1kNg5n014WGMZ5q2_CQpm_XAdyRKJQ3211iWlu9eXhsv6Tjl7zU1UVOyVO7W0hP/exec)
+fetch("PASTE YOUR GOOGLE SCRIPT URL HERE")
 
 .then(res => res.json())
 
@@ -736,11 +736,15 @@ year:item.year,
 category:item.category,
 severity:item.severity,
 time:item.timestamp,
-desc:item.description
+desc:item.description,
+submitted:new Date(item.submitted)
 
 }));
 
-// Replace current data instead of pushing duplicates
+// Sort newest first
+formatted.sort((a,b) => b.submitted - a.submitted);
+
+// Replace current data
 data.length = 0;
 data.push(...formatted);
 
