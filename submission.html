@@ -176,8 +176,12 @@ body: JSON.stringify(entry)
 .then(res => res.json())
 .then(res => {
 
-alert("Submission saved");
+if(res.result === "duplicate"){
+alert("This trigger entry already exists.");
+return;
+}
 
+alert("Submission saved successfully!");
 window.location.href = "thankyou.html";
 });
 }
