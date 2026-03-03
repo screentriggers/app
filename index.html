@@ -507,6 +507,7 @@ desc: item.description
 
 // Combine both
 let data = [...defaultData, ...formattedSavedData];
+let sheetData = [];
 
 const categories = [
 "Gun violence",
@@ -729,25 +730,21 @@ fetch("https://script.google.com/macros/s/AKfycbw_5_SepS63HeiqTk2Zc090uv0vpqsvRS
 
 .then(rows => {
 
-let formatted = rows.map(item => ({
-
-title:item.title,
-year:item.year,
-category:item.category,
-severity:item.severity,
-time:item.timestamp,
-desc:item.description,
-submitted:new Date(item.submitted)
-
+sheetData = rows.map(item => ({
+  title:item.title,
+  year:item.year,
+  category:item.category,
+  severity:item.severity,
+  time:item.timestamp,
+  desc:item.description,
+  submitted:new Date(item.submitted)
 }));
 
-// Sort newest first
-formatted.sort((a,b) => b.submitted - a.submitted);
+sheetData.sort((a,b) => b.submitted - a.submitted);
 
-// Merge default + sheet data
-data = [...defaultData, ...formatted];
+// Merge fresh every time
+data = [...defaultData, ...sheetData];
 
-// Re-render
 render(data);
 
 })
@@ -755,8 +752,8 @@ render(data);
 .catch(err => {
 console.error("Load error:", err);
 });
-     
 }
+     
 updateFilterButton();
      
 </script>
