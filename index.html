@@ -829,28 +829,30 @@ How
 </div>
 
 <script>
-window.addEventListener("load", function(){
-
-  showHome();
-  loadFromSheets();
+document.addEventListener("DOMContentLoaded", function(){
 
   const splash = document.getElementById("splash");
 
-  if (splash) {
+  // Force splash to stay visible before app renders
+  showHome();
 
-    // Wait 1.2 seconds so user sees it
-    setTimeout(() => {
+  // Minimum visible time
+  const MIN_SPLASH_TIME = 1500;
 
+  setTimeout(function(){
+
+    if (splash) {
       splash.classList.add("hide");
 
-      // Fully remove after fade animation completes
-      setTimeout(() => {
+      setTimeout(function(){
         splash.style.display = "none";
       }, 600);
+    }
 
-    }, 1200);
+  }, MIN_SPLASH_TIME);
 
-  }
+  // Load data in background (does not control splash)
+  loadFromSheets();
 
 });
 
