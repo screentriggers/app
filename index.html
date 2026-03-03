@@ -744,8 +744,8 @@ submitted:new Date(item.submitted)
 // Sort newest first
 formatted.sort((a,b) => b.submitted - a.submitted);
 
-// Replace entire data array
-data = formatted;
+// Merge default + sheet data
+data = [...defaultData, ...formatted];
 
 // Re-render
 render(data);
