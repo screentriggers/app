@@ -336,6 +336,47 @@ letter-spacing:0.5px;
 100%{transform:scale(1);opacity:1;}
 }
 
+.install-banner{
+position:fixed;
+bottom:95px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+padding:14px 18px;
+border-radius:14px;
+box-shadow:0 6px 18px rgba(0,0,0,0.2);
+display:flex;
+align-items:center;
+gap:14px;
+z-index:999;
+animation:installSlide 0.4s ease;
+}
+
+.install-text{
+font-weight:600;
+font-size:15px;
+}
+
+.install-btn{
+background:#0b3d91;
+color:white;
+border:none;
+padding:10px 16px;
+border-radius:8px;
+font-weight:600;
+cursor:pointer;
+}
+
+@keyframes installSlide{
+from{
+transform:translate(-50%,20px);
+opacity:0;
+}
+to{
+transform:translate(-50%,0);
+opacity:1;
+}
+
 </style>
 </head>
 
