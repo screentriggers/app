@@ -9,7 +9,6 @@
   "background_color": "#0b3d91",
   "theme_color": "#0b3d91",
   "description": "Screen Triggers Library",
-  {
   "icons": [
     {
       "src": "icon-192.png",
@@ -34,5 +33,4 @@
       "purpose": "maskable"
     }
   ]
-}
 }
