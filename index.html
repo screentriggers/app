@@ -1014,14 +1014,18 @@ function detectIOS(){
 
 window.addEventListener("beforeinstallprompt", (e) => {
 
+  console.log("Install prompt available");
+
   e.preventDefault();
 
   deferredPrompt = e;
 
   setTimeout(()=>{
 
-    installBanner.style.display="flex";
-    installBanner.classList.add("show");
+    if(installBanner){
+      installBanner.style.display="flex";
+      installBanner.classList.add("show");
+    }
 
   },4000);
 
