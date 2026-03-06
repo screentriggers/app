@@ -982,7 +982,9 @@ window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
 
-  installBanner.style.display = "flex";
+ setTimeout(()=>{
+  installBanner.style.display="flex";
+},4000);
 
 });
 
