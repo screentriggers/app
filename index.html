@@ -945,6 +945,10 @@ How
 </div>
 
 <script>
+
+let deferredPrompt;
+let installBanner;
+
 document.addEventListener("DOMContentLoaded", function(){
 
   const splash = document.getElementById("splash");
@@ -971,13 +975,6 @@ document.addEventListener("DOMContentLoaded", function(){
   // Load data in background (does not control splash)
   loadFromSheets();
 
-});
-
-let deferredPrompt;
-let installBanner;
-
-document.addEventListener("DOMContentLoaded", () => {
-  installBanner = document.getElementById("installBanner");
 });
 
 window.addEventListener("beforeinstallprompt", (e) => {
