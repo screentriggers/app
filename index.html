@@ -1044,14 +1044,9 @@ window.addEventListener("beforeinstallprompt", (e) => {
 
   deferredPrompt = e;
 
-  setTimeout(()=>{
-
-    if(installBanner){
-      installBanner.style.display="flex";
-      installBanner.classList.add("show");
-    }
-
-  },4000);
+  if(userEngaged){
+    showInstallBanner();
+  }
 
 });
 
