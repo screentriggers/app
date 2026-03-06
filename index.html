@@ -1080,6 +1080,25 @@ function showInstallBanner(){
     installBanner.classList.add("show");
   },50);
 }
+
+function checkURLForMovie(){
+
+  const params = new URLSearchParams(window.location.search);
+  const movieTitle = params.get("title");
+
+  if(!movieTitle) return;
+
+  // Open library automatically
+  showLibrary();
+
+  // Fill search box
+  const searchInput = document.getElementById("searchInput");
+  searchInput.value = movieTitle;
+
+  // Run filter
+  filter();
+
+}
 </script>
      
 <script>
