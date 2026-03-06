@@ -973,52 +973,35 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
-let deferredPrompt = null;
+let deferredPrompt;
 let installBanner;
-     
-/* Detect install availability */
-window.addEventListener("beforeinstallprompt", (event) => {
 
-  console.log("Install available");
-
-  event.preventDefault();
-
-  deferredPrompt = event;
-
-  /* Show install button */
-  installBanner.style.display = "flex";
+document.addEventListener("DOMContentLoaded", () => {
+  installBanner = document.getElementById("installBanner");
 });
 
+window.addEventListener("beforeinstallprompt", (e) => {
 
-/* Install button click */
-async function installApp(){
+  e.preventDefault();
+  deferredPrompt = e;
 
-  if (!deferredPrompt) return;
+  installBanner.style.display = "flex";
+
+});
+
+function installApp(){
+
+  if(!deferredPrompt) return;
 
   deferredPrompt.prompt();
 
-  const choiceResult = await deferredPrompt.userChoice;
+  deferredPrompt.userChoice.then(() => {
+    deferredPrompt = null;
+  });
 
-  if (choiceResult.outcome === "accepted") {
-
-    console.log("User accepted install");
-
-  } else {
-
-    console.log("User dismissed install");
-
-  }
-
-  deferredPrompt = null;
-
-  installBanner.style.display = "none";
 }
 
-
-/* Detect successful install */
 window.addEventListener("appinstalled", () => {
-
-  console.log("App installed successfully");
 
   installBanner.style.display = "none";
 
