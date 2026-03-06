@@ -973,7 +973,7 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 let deferredPrompt = null;
-const installBanner = document.getElementById("installBanner");
+let installBanner;
      
 /* Detect install availability */
 window.addEventListener("beforeinstallprompt", (event) => {
