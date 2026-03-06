@@ -982,9 +982,10 @@ window.addEventListener("beforeinstallprompt", (e) => {
 
   setTimeout(()=>{
 
-    installBanner.classList.add("show");
+  installBanner.style.display = "flex";
+  installBanner.classList.add("show");
 
-  },4000);
+},4000);
 
 });
 
