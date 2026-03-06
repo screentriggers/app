@@ -1072,6 +1072,17 @@ window.addEventListener("appinstalled", () => {
   installBanner.style.display="none";
 
 });
+
+function showInstallBanner(){
+
+  if(!installBanner) return;
+
+  installBanner.style.display = "flex";
+
+  setTimeout(()=>{
+    installBanner.classList.add("show");
+  },50);
+}
 </script>
      
 <script>
