@@ -961,11 +961,14 @@ How
 
 let deferredPrompt;
 let installBanner;
+let iosBanner;
 
 document.addEventListener("DOMContentLoaded", function(){
 
   const splash = document.getElementById("splash");
+
   installBanner = document.getElementById("installBanner");
+  iosBanner = document.getElementById("iosInstallBanner");
 
   showHome();
 
@@ -985,19 +988,41 @@ document.addEventListener("DOMContentLoaded", function(){
 
   loadFromSheets();
 
+  detectIOS();
+
 });
+
+function detectIOS(){
+
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+  const isInStandalone =
+    window.navigator.standalone ||
+    window.matchMedia('(display-mode: standalone)').matches;
+
+  if(isIOS && !isInStandalone){
+
+    setTimeout(()=>{
+      iosBanner.style.display = "flex";
+      iosBanner.classList.add("show");
+    },4000);
+
+  }
+
+}
 
 window.addEventListener("beforeinstallprompt", (e) => {
 
   e.preventDefault();
+
   deferredPrompt = e;
 
   setTimeout(()=>{
 
-  installBanner.style.display = "flex";
-  installBanner.classList.add("show");
+    installBanner.style.display="flex";
+    installBanner.classList.add("show");
 
-},4000);
+  },4000);
 
 });
 
