@@ -994,6 +994,29 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
+function registerEngagement(){
+
+  const engage = () => {
+
+    userEngaged = true;
+
+    if(deferredPrompt){
+      showInstallBanner();
+    }
+
+    window.removeEventListener("scroll", engage);
+    window.removeEventListener("click", engage);
+    window.removeEventListener("touchstart", engage);
+  };
+
+  window.addEventListener("scroll", engage);
+  window.addEventListener("click", engage);
+  window.addEventListener("touchstart", engage);
+
+}
+
+registerEngagement();
+
 function detectIOS(){
 
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
