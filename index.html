@@ -955,10 +955,8 @@ document.addEventListener("DOMContentLoaded", function(){
   const splash = document.getElementById("splash");
   installBanner = document.getElementById("installBanner");
 
-  // Force splash to stay visible before app renders
   showHome();
 
-  // Minimum visible time
   const MIN_SPLASH_TIME = 1500;
 
   setTimeout(function(){
@@ -973,7 +971,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
   }, MIN_SPLASH_TIME);
 
-  // Load data in background (does not control splash)
   loadFromSheets();
 
 });
@@ -983,9 +980,11 @@ window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
 
- setTimeout(()=>{
-  installBanner.style.display="flex";
-},4000);
+  setTimeout(()=>{
+
+    installBanner.classList.add("show");
+
+  },4000);
 
 });
 
@@ -1003,7 +1002,7 @@ function installApp(){
 
 window.addEventListener("appinstalled", () => {
 
-  installBanner.style.display = "none";
+  installBanner.style.display="none";
 
 });
 </script>
