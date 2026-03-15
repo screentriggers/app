@@ -866,13 +866,16 @@ sheetData = rows.map(item => ({
 
 }));
 
-sheetData.sort((a,b) => b.submitted - a.submitted);
-
 // Merge fresh every time
 data = [...defaultData, ...sheetData];
 
+// SORT ALPHABETICALLY BY TITLE
+data.sort((a, b) =>
+  a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
+);
+
 console.log("Merged data:", data);
-     
+
 render(data);
 
 })
