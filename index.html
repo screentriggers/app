@@ -728,6 +728,10 @@ return matchesTitle && matchesCategory;
 
 });
 
+filtered.sort((a, b) =>
+  a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
+);
+
 render(filtered);
 
 }
