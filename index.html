@@ -734,6 +734,11 @@ filtered.sort((a, b) =>
 
 render(filtered);
 
+// ✅ ADD THIS BLOCK
+if(filtered.length === 0 && text.trim() !== ""){
+  showModal();
+}
+
 }
 
 function clearFilters(){
