@@ -708,44 +708,6 @@ document.getElementById("results").innerHTML=html;
 
 function filter(){
 
-let text =
-document.getElementById("searchInput").value.toLowerCase();
-
-let filtered = data.filter(item => {
-
-let matchesTitle =
-item.title.toLowerCase().includes(text);
-
-let matchesCategory =
-selectedCategories.length === 0 ||
-(
-Array.isArray(item.category)
-? item.category.some(cat => selectedCategories.includes(cat))
-: selectedCategories.includes(item.category)
-);
-
-return matchesTitle && matchesCategory;
-
-});
-
-filtered.sort((a, b) =>
-  a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
-);
-
-render(filtered);
-
-// ✅ ADD THIS BLOCK
-if(filtered.length === 0 && text.trim() !== ""){
-  if(!window.noResultsShown){
-    showModal();
-    window.noResultsShown = true;
-  }
-}else{
-  window.noResultsShown = false;
-}
-
-function filter(){
-
   let text =
   document.getElementById("searchInput").value.toLowerCase();
 
