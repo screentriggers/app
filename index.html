@@ -505,7 +505,7 @@ By contributing, users help build a culture of transparency around media - one w
 <div class="container" id="library" style="display:none;">
 
 <input class="search" placeholder="Search title..."
-oninput="filter()"
+onkeydown="handleSearch(event)"
 id="searchInput">
 
 <div class="filter-dropdown">
@@ -744,6 +744,51 @@ if(filtered.length === 0 && text.trim() !== ""){
   window.noResultsShown = false;
 }
 
+function filter(){
+
+  let text =
+  document.getElementById("searchInput").value.toLowerCase();
+
+  let filtered = data.filter(item => {
+
+    let matchesTitle =
+    item.title.toLowerCase().includes(text);
+
+    let matchesCategory =
+    selectedCategories.length === 0 ||
+    (
+      Array.isArray(item.category)
+      ? item.category.some(cat => selectedCategories.includes(cat))
+      : selectedCategories.includes(item.category)
+    );
+
+    return matchesTitle && matchesCategory;
+
+  });
+
+  filtered.sort((a, b) =>
+    a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
+  );
+
+  render(filtered);
+
+  if(filtered.length === 0 && text.trim() !== ""){
+    if(!window.noResultsShown){
+      showModal();
+      window.noResultsShown = true;
+    }
+  }else{
+    window.noResultsShown = false;
+  }
+
+}
+
+// ✅ ADD IT RIGHT HERE
+function handleSearch(e){
+  if(e.key === "Enter"){
+    window.noResultsShown = false;
+    filter();
+  }
 }
 
 function clearFilters(){
