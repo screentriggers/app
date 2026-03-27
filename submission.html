@@ -243,31 +243,30 @@ let timestamp = document.getElementById("timestamp").value.trim();
 
 // ✅ VALIDATION
 if (!title) {
-  alert("Title is required.");
+  showError("Please enter a title.");
   return;
 }
 
 if (!year) {
-  alert("Year is required.");
+  showError("Please enter a year.");
   return;
 }
 
 if (categories.length === 0) {
-  alert("Please select at least one Trigger Category.");
+  showError("Select at least one trigger category.");
   return;
 }
 
 if (!description) {
-  alert("Description is required.");
+  showError("Please add a description.");
   return;
 }
 
 if (timestamp) {
-  // Matches HH:MM:SS (00–59 for MM/SS, 00–23 for HH)
   let timePattern = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
 
   if (!timePattern.test(timestamp)) {
-    alert("Timestamp must be in format 00:00:00 (HH:MM:SS).");
+    showError("Timestamp must be in format 00:00:00.");
     return;
   }
 }
