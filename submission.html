@@ -219,18 +219,42 @@ return word.charAt(0).toUpperCase() + word.slice(1);
 
 function save(){
 
+let title = document.getElementById("title").value.trim();
+let year = document.getElementById("year").value.trim();
+let categorySelect = document.getElementById("category");
+let categories = Array.from(categorySelect.selectedOptions).map(option => option.value);
+let description = document.getElementById("description").value.trim();
+
+// ✅ VALIDATION
+if (!title) {
+  alert("Title is required.");
+  return;
+}
+
+if (!year) {
+  alert("Year is required.");
+  return;
+}
+
+if (categories.length === 0) {
+  alert("Please select at least one Trigger Category.");
+  return;
+}
+
+if (!description) {
+  alert("Description is required.");
+  return;
+}
+
+// ✅ BUILD ENTRY AFTER VALIDATION
 let entry = {
-  title: toTitleCase(
-    document.getElementById("title").value.trim()
-  ),
-  year: document.getElementById("year").value,
-  category: Array.from(
-    document.getElementById("category").selectedOptions
-  ).map(option => option.value),
+  title: toTitleCase(title),
+  year: year,
+  category: categories,
   severity: document.getElementById("severity").value,
   timestamp: document.getElementById("timestamp").value,
-  description: document.getElementById("description").value
-};  // ✅ THIS WAS MISSING
+  description: description
+};
 
 fetch("https://script.google.com/macros/s/AKfycbw_5_SepS63HeiqTk2Zc090uv0vpqsvRSHH5G3kPAyxyvZxNhGd-UJdvxOc09dYMxs/exec", {
   method: "POST",
@@ -251,7 +275,6 @@ fetch("https://script.google.com/macros/s/AKfycbw_5_SepS63HeiqTk2Zc090uv0vpqsvRS
   console.error("Fetch error:", err);
   alert("Submission failed.");
 });
-  
 }
 </script>
 
