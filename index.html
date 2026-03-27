@@ -1125,6 +1125,19 @@ function checkURLForMovie(){
 }
 
 function showModal(){
+
+  const searchValue = document
+    .getElementById("searchInput")
+    .value.trim();
+
+  const btn = document.getElementById("addTitleBtn");
+
+  if(searchValue){
+    btn.href = "submission.html?title=" + encodeURIComponent(searchValue);
+  }else{
+    btn.href = "submission.html";
+  }
+
   document.getElementById("noResultsModal").style.display = "flex";
 }
 
