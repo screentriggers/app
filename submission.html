@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function(){
   if(title){
     const titleInput = document.getElementById("title");
     if(titleInput){
-      titleInput.value = title;
+      titleInput.value = decodeURIComponent(title);
     }
   }
 
