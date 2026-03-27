@@ -224,6 +224,7 @@ let year = document.getElementById("year").value.trim();
 let categorySelect = document.getElementById("category");
 let categories = Array.from(categorySelect.selectedOptions).map(option => option.value);
 let description = document.getElementById("description").value.trim();
+let timestamp = document.getElementById("timestamp").value.trim();
 
 // ✅ VALIDATION
 if (!title) {
@@ -244,6 +245,16 @@ if (categories.length === 0) {
 if (!description) {
   alert("Description is required.");
   return;
+}
+
+if (timestamp) {
+  // Matches HH:MM:SS (00–59 for MM/SS, 00–23 for HH)
+  let timePattern = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
+
+  if (!timePattern.test(timestamp)) {
+    alert("Timestamp must be in format 00:00:00 (HH:MM:SS).");
+    return;
+  }
 }
 
 // ✅ BUILD ENTRY AFTER VALIDATION
