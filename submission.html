@@ -304,5 +304,68 @@ fetch("https://script.google.com/macros/s/AKfycbw_5_SepS63HeiqTk2Zc090uv0vpqsvRS
 }
 </script>
 
+<div id="errorModal" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+z-index:2000;
+align-items:center;
+justify-content:center;
+">
+
+  <div style="
+  background:white;
+  padding:22px;
+  border-radius:16px;
+  max-width:320px;
+  width:90%;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  animation:fadeIn 0.25s ease;
+  ">
+
+    <div style="
+    font-size:20px;
+    font-weight:700;
+    color:#0b3d91;
+    margin-bottom:10px;
+    ">
+      ⚠️ Missing Information
+    </div>
+
+    <div id="errorMessage" style="
+    font-size:14px;
+    color:#555;
+    margin-bottom:18px;
+    line-height:1.4;
+    ">
+    </div>
+
+    <button onclick="closeErrorModal()" style="
+    background:#0b3d91;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    width:100%;
+    font-weight:600;
+    ">
+      Got it
+    </button>
+
+  </div>
+</div>
+
+<style>
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.9);}
+  to{opacity:1; transform:scale(1);}
+}
+</style>
+
 </body>
 </html>
