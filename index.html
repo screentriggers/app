@@ -1084,5 +1084,54 @@ if ("serviceWorker" in navigator) {
     .then(() => console.log("Service Worker registered"));
 }
 </script>
+
+<!-- NO RESULTS POPUP -->
+<div id="noResultsModal" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+z-index:2000;
+align-items:center;
+justify-content:center;
+">
+
+  <div style="
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  max-width:300px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  ">
+
+    <div style="font-size:18px; font-weight:600; margin-bottom:10px;">
+      This title hasn't been added yet
+    </div>
+
+    <div style="margin-bottom:15px; font-size:14px; color:#555;">
+      Help the community by adding it.
+    </div>
+
+    <a href="submission.html" class="button">
+      Add this title
+    </a>
+
+    <button onclick="closeModal()" style="
+    margin-top:10px;
+    background:#ddd;
+    border:none;
+    padding:10px;
+    border-radius:8px;
+    width:100%;
+    ">
+      Close
+    </button>
+
+  </div>
+</div>
 </body>
 </html>
