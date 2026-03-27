@@ -736,7 +736,12 @@ render(filtered);
 
 // ✅ ADD THIS BLOCK
 if(filtered.length === 0 && text.trim() !== ""){
-  showModal();
+  if(!window.noResultsShown){
+    showModal();
+    window.noResultsShown = true;
+  }
+}else{
+  window.noResultsShown = false;
 }
 
 }
