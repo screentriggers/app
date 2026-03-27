@@ -154,6 +154,21 @@ Hold CTRL (Windows) or tap multiple items (mobile) to select more than one
  
 <script>
 
+// ✅ AUTO-FILL TITLE FROM SEARCH
+document.addEventListener("DOMContentLoaded", function(){
+
+  const params = new URLSearchParams(window.location.search);
+  const title = params.get("title");
+
+  if(title){
+    const titleInput = document.getElementById("title");
+    if(titleInput){
+      titleInput.value = title;
+    }
+  }
+
+});
+
 function toTitleCase(str){
 
 const smallWords = [
