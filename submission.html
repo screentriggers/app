@@ -167,6 +167,13 @@ document.addEventListener("DOMContentLoaded", function(){
     }
   }
 
+// ✅ ADD IT RIGHT HERE
+  document.getElementById("errorModal").addEventListener("click", function(e){
+    if(e.target === this){
+      closeErrorModal();
+    }
+  });
+
 });
 
 // ✅ ADD STEP 2 RIGHT HERE
