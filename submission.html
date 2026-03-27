@@ -169,6 +169,16 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
+// ✅ ADD STEP 2 RIGHT HERE
+function showError(message){
+  document.getElementById("errorMessage").innerText = message;
+  document.getElementById("errorModal").style.display = "flex";
+}
+
+function closeErrorModal(){
+  document.getElementById("errorModal").style.display = "none";
+}
+
 function toTitleCase(str){
 
 const smallWords = [
@@ -289,7 +299,7 @@ fetch("https://script.google.com/macros/s/AKfycbw_5_SepS63HeiqTk2Zc090uv0vpqsvRS
 .then(res => {
 
   if(res.result === "duplicate"){
-    alert("This trigger entry already exists.");
+    showError("This trigger entry already exists.");
     return;
   }
 
@@ -298,7 +308,7 @@ fetch("https://script.google.com/macros/s/AKfycbw_5_SepS63HeiqTk2Zc090uv0vpqsvRS
 })
 .catch(err => {
   console.error("Fetch error:", err);
-  alert("Submission failed.");
+  showError("Submission failed.");
 });
 }
 </script>
