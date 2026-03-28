@@ -279,15 +279,6 @@ if (!description) {
   return;
 }
 
-if (timestamp) {
-  let timePattern = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
-
-  if (!timePattern.test(timestamp)) {
-    showError("Timestamp must be in format 00:00:00.");
-    return;
-  }
-}
-
 // ✅ BUILD ENTRY AFTER VALIDATION
 let entry = {
   title: toTitleCase(title),
