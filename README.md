@@ -9,9 +9,9 @@ https://screentriggers.github.io/app/
 
 ## 🧠 Why this exists
 
-Not every movie is a safe watch—especially if you're navigating grief, trauma, or sensitivity to certain themes.
+Not every movie is a safe watch - especially if you're navigating grief, trauma, or sensitivity to certain themes.
 
-ScreenTriggers helps you **make informed viewing decisions** by showing user-submitted content warnings for movies—so you can avoid being caught off guard.
+ScreenTriggers helps you **make informed viewing decisions** by showing user-submitted content warnings for movies, so you can avoid being caught off guard.
 
 ---
 
@@ -72,4 +72,4 @@ To create a simple, accessible way for people to **feel safer choosing what to w
 ## 📬 Feedback
 
 Have ideas or want to improve this?
-Open an issue or contribute—this is just the beginning.
+Open an issue or contribute; this is just the beginning.
